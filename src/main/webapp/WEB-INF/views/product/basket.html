@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>InstaGod</title>
+</head>
+
+<body >
+Basket
+<div th:replace="/fragment/navBar.html :: navBar"></div>
+<span th:text="${message}"></span>
+<div th:each="orderItem : ${basket}">
+        <div><img src="https://flowersbrest.by/wp-content/uploads/2020/03/IMG_9831.jpg" width="100px" height="100px"></div>
+        <div><span th:text="${orderItem.getNote()}"></span></div>
+        <div><span th:text="${orderItem.getProduct().getTitle()}"></span></div>
+</div>
+
+</body>
+</html>

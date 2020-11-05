@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="productBar">
+    <div th:each="product : ${products}">
+ <div><img src="https://flowersbrest.by/wp-content/uploads/2020/03/IMG_9831.jpg" width="100px" height="100px"></div>
+    <div><span th:text="${product.getTitle()}"></span></div>
+    <div>
+        <a th:href="${#servletContext.getContextPath()}+'/app/product/'+${product.getURL()}">Цена</a>
+        <a href="#">Наличие</a>
+        <a href="#">В корзину</a>
+    </div>
+    <div>
+        <a href="#">Редактировать</a>
+        <a href="#">В архив</a>
+        <a href="#">Удалить</a>
+    </div>
+    </div>
+</div>

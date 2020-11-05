@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>InstaGod</title>
+</head>
+
+<body >
+Product
+<div th:replace="/fragment/navBar.html :: navBar"></div>
+<span th:text="${message}"></span>
+<div>
+    <div><img></div>
+    <div><span th:text="${product.getTitle()}"></span></div>
+    <div><span th:text="${product.getDescription()}"></span></div>
+    <div>Доставка</div>
+    <div>Способ оплаты</div>
+    <div>К каждому букету</div>
+    <div>Выбор размера</div>
+    <div>Цена</div>
+    <div>В корзину</div>
+    <div><a href="#">Оформить заказ</a></div>
+</div>
+</body>
+</html>

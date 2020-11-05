@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="navBar">
+    <ul>
+        <li><a th:href="${#servletContext.getContextPath()}+'/app/category/box'">Цветы в коробке</a></li>
+        <li><a th:href="${#servletContext.getContextPath()}+'/app/category/composition'">По состваву</a></li>
+        <li><a th:href="${#servletContext.getContextPath()}+'/app/category/color'">По цвету помпозиции</a></li>
+        <li><a th:href="${#servletContext.getContextPath()}+'/app/category/occasion'">Повод</a></li>
+        <li><a th:href="${#servletContext.getContextPath()}+'/app/category/gift'">Подарки</a></li>
+        <li><a th:href="${#servletContext.getContextPath()}+'/app/basket'">Корзина</a></li>
+        <li><a th:href="${#servletContext.getContextPath()}+'/app/login'">Вход в систему</a></li>
+        <li><a th:href="${#servletContext.getContextPath()}+'/app/logout'">Выход из системы</a></li>
+    </ul>
+</div>
