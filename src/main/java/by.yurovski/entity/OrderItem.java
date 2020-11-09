@@ -21,7 +21,7 @@ public class OrderItem {
     @Id
     @Column(name="id")
     @GeneratedValue
-    private int id;
+    private long id;
 
     @Column(name="amount")
     private int amount;
@@ -32,12 +32,10 @@ public class OrderItem {
     @Column(name="note")
     private String note;
 
-    @ManyToOne( fetch=FetchType.EAGER,
-            cascade=CascadeType.MERGE)
+    @ManyToOne( fetch=FetchType.EAGER)
     @JoinColumn(name="prod_id")
     private Product product;
-    @ManyToOne( fetch=FetchType.EAGER,
-            cascade=CascadeType.MERGE)
+    @ManyToOne( fetch=FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User user;
 

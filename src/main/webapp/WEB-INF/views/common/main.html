@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <html>
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link href="css/common/main.css" rel="stylesheet"/>
     <title>InstaGod</title>
 </head>
 
 <body >
- MainPage
  <div th:replace="/fragment/navBar.html :: navBar"></div>
- <span th:text="${message}+' '+${userName}+' '+ ${role}"></span>
- <div th:replace="/fragment/productBar.html :: productBar"></div>
+ MainPage
 
+<script src="js/main.js"></script>
 </body>
 </html>

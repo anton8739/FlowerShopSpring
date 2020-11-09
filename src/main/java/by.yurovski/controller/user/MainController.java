@@ -1,4 +1,4 @@
-package by.yurovski.controller;
+package by.yurovski.controller.user;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;

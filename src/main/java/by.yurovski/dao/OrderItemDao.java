@@ -12,4 +12,10 @@ import java.util.List;
 @Repository
 public interface OrderItemDao  extends JpaRepository<OrderItem, Long> {
     List<OrderItem> findAllByUser(User user);
+    OrderItem findById(int id);
+
+
+
+    @Override
+    void deleteById(Long aLong);
 }

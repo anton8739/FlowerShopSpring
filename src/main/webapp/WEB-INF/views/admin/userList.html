@@ -7,10 +7,13 @@
 </head>
 
 <body >
-Occasion
+BOX
 <div th:replace="/fragment/navBar.html :: navBar"></div>
-<span th:text="${message}+' '+${userName}+' '+ ${role}"></span>
-<div th:replace="/fragment/productBar.html :: productBar"></div>
+<div th:each="user : ${users}">
+    <span><span th:text="'Логин: '+${user.getLogin()}+' Email: '
+    +${user.getEmail()}+' Статус: '+${user.isEnabled()}+' Роль: '+${user.getRole()}+' '"></span></span>
+</div>
+
 
 </body>
 </html>

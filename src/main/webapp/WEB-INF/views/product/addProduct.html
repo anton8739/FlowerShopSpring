@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>InstaGod</title>
+</head>
+
+<body >
+edit product page
+<div th:replace="/fragment/navBar.html :: navBar"></div>
+<form  method="post" enctype="application/x-www-form-urlencoded" th:action="${#servletContext.getContextPath()}+'/app/add'" accept-charset="utf-8">
+    <p>
+        <label >title</label>
+        <input type="text"  name="title"  placeholder="Username" required>
+    </p>
+    <p>
+        <label >description</label>
+        <input type="text"  name="description"  placeholder="Username" required>
+    </p>
+    <p>
+        <label >Cost</label>
+        <input type="text"  name="cost"  placeholder="Username" required>
+    </p>
+    <p>
+        <label >availability</label>
+        <input type="text"  name="availability"  placeholder="Username" required>
+    </p>
+    <p>
+        <label >URL</label>
+        <input type="text"  name="url"  placeholder="Username" required>
+    </p>
+    <p>
+        <label >Category</label>
+        <select type="text"  name="category">
+            <option value="BOX">BOX</option>
+            <option value="COLOR">COLOR</option>
+            <option value="COMPOSITION">COMPOSITION</option>
+            <option value="GIFT">GIFT</option>
+            <option value="OCCASION">OCCASION</option>
+        </select>
+
+    </p>
+    <p>
+        <label >Status</label>
+        <select type="text"  name="status">
+            <option value="AVAILABLE">AVAILABLE</option>
+            <option value="NOT_AVAILABLE">NOT_AVAILABLE</option>
+            <option value="ARCHIVE">ARCHIVE</option>
+
+        </select>
+
+    </p>
+    <button type="submit">Send</button>
+</form>
+
+</body>
+</html>

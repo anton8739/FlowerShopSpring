@@ -14,13 +14,32 @@ Product
     <div><img></div>
     <div><span th:text="${product.getTitle()}"></span></div>
     <div><span th:text="${product.getDescription()}"></span></div>
-    <div>Доставка</div>
-    <div>Способ оплаты</div>
+    <div>Доставка: <span>Доставка бесплатно 24/7, день в день или в согласованную дату.
+Время доставки – от 2 часов. Возможна срочная доставка по согласованию с менеджером.
+
+Доставка внутри МКАД – Бесплатно
+До 10км. от МКАД – 490р.
+За пределами 10км. от МКАД – 50р. за км.</span></div>
+    <div>Способ оплаты: <span>– Банковской картой
+– Наличными
+– PayPal
+– Картой курьеру
+– По счету для юр. лиц</span></div>
     <div>К каждому букету</div>
-    <div>Выбор размера</div>
-    <div>Цена</div>
-    <div>В корзину</div>
-    <div><a href="#">Оформить заказ</a></div>
+    <form method="post" enctype="application/x-www-form-urlencoded" th:action="${#servletContext.getContextPath()}+'/app/basket/add'" accept-charset="utf-8">
+        <input type="hidden" name="id" th:value="${product.getId()}">
+        <select type="text"  name="size">
+            <option value="30 см">30 см</option>
+            <option value="40 см">40 см</option>
+            <option value="50 см">50 см</option>
+            <option value="60 см">60 см</option>
+        </select>
+        <div><input type="text" name="amount">Выбор количества</div>
+        <div><input type="text" name="note">Ваши пожелания</div>
+        <div>Итоговая Цена</div>
+        <button type="submit">В корзину</button>
+    </form>
+
 </div>
 </body>
 </html>

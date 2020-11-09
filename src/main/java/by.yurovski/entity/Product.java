@@ -1,6 +1,7 @@
 package by.yurovski.entity;
 
 import by.yurovski.enums.CategoryEnum;
+import by.yurovski.enums.ProductStatusEnum;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,16 +14,18 @@ public class Product {
     public Product(){
 
     }
-    public Product(String title, String description, double cost, String foto, String url){
+    public Product(String title, String description, double cost, String url, CategoryEnum category, int availability, ProductStatusEnum productStatusEnum){
         this.title=title;
         this.description=description;
         this.cost=cost;
-        this.foto=foto;
+        this.category=category;
         this.URL=url;
+        this.availability=availability;
+        this.status=productStatusEnum;
     }
     @Id
     @Column(name="id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name="title")
@@ -36,6 +39,7 @@ public class Product {
 
     @Column(name="foto")
     private String foto;
+
     @Enumerated(value = EnumType.STRING)
     @Column(name="category")
     private CategoryEnum category;
@@ -43,9 +47,15 @@ public class Product {
     @Column(name="url")
     private String URL;
 
+    @Column(name="availability")
+    private int availability;
+    @Enumerated(value = EnumType.STRING)
+    @Column(name="status")
+    private ProductStatusEnum status;
+
     @OneToMany (fetch = FetchType.EAGER,
             mappedBy = "product",
-            cascade = CascadeType.ALL)
+            cascade = CascadeType.REMOVE)
     private List<OrderItem>  orderItems;
 
 

@@ -1,10 +1,9 @@
-package by.yurovski.controller.category;
-import by.yurovski.dao.ProductDao;
+package by.yurovski.controller.orderItem;
+
+import by.yurovski.entity.OrderItem;
 import by.yurovski.entity.Product;
-
-
 import by.yurovski.entity.User;
-import by.yurovski.enums.CategoryEnum;
+import by.yurovski.service.OrderItemService;
 import by.yurovski.service.ProductService;
 import by.yurovski.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,29 +14,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
-public class BoxCategoryController {
-
-   @Autowired
+public class DeleteFromBasket {
+    @Autowired
     ProductService productService;
     @Autowired
     UserService userService;
+    @Autowired
+    OrderItemService orderItemService;
 
-    @GetMapping("/category/box")
-    @PreAuthorize("hasAuthority('product:edit')")
-    public String mainPageGet(Model model, Principal principal){
-        List<Product> products=productService.findAllByCategory(CategoryEnum.BOX);
-        String login = principal.getName();
-        User user=userService.findUserByLogin(login);
-        model.addAttribute("products",products);
-        model.addAttribute("userName",user.getLogin());
-        model.addAttribute("role",user.getRole().toString());
-        model.addAttribute("message", "Hello, master");
-        return "common/box.html";
+    @GetMapping(value = "/basket/delete")
+    @PreAuthorize("hasAuthority('product:read')")
+    public String mainPagePost(@RequestParam String id,
+                               Model model, Principal principal){
+
+        orderItemService.deleteById(Long.parseLong(id));
+        return "common/main.html";
+
     }
     @ExceptionHandler(AccessDeniedException.class)
     public String handleAccessDeniedException(AccessDeniedException ex,Model model) throws Exception {
@@ -45,5 +42,4 @@ public class BoxCategoryController {
         model.addAttribute("message", "Доступ запрещен всвязи с недостаточностью прав.");
         return "user/errorAccessdenied.html";
     }
-
 }

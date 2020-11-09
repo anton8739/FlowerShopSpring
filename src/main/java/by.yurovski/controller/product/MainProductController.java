@@ -1,11 +1,8 @@
-package by.yurovski.controller.category;
+package by.yurovski.controller.product;
 
 import by.yurovski.dao.ProductDao;
 import by.yurovski.entity.Product;
-import by.yurovski.entity.User;
-import by.yurovski.enums.CategoryEnum;
 import by.yurovski.service.ProductService;
-import by.yurovski.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,28 +10,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
-public class GiftCategoryController {
+public class MainProductController {
+
     @Autowired
     ProductService productService;
-    @Autowired
-    UserService userService;
-    @GetMapping("/category/gift")
+
+    @GetMapping("/product/{productURL}")
     @PreAuthorize("hasAuthority('product:read')")
-    public String mainPageGet(Model model, Principal principal){
-        List<Product> products=productService.findAllByCategory(CategoryEnum.GIFT);
-        String login = principal.getName();
-        User user=userService.findUserByLogin(login);
-        model.addAttribute("products",products);
-        model.addAttribute("userName",user.getLogin());
-        model.addAttribute("role",user.getRole().toString());
-        model.addAttribute("message", "Hello, master");
-        return "common/gift.html";
+    public String mainPageGet(@PathVariable String productURL, Model model, Principal principal){
+        Product product=productService.findProductsByURL(productURL);
+        model.addAttribute("product", product);
+        model.addAttribute("message", "Hello, Anton Yurovski");
+        return "product/product.html";
     }
     @ExceptionHandler(AccessDeniedException.class)
     public String handleAccessDeniedException(AccessDeniedException ex,Model model) throws Exception {

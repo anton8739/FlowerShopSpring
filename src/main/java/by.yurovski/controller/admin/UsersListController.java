@@ -1,10 +1,8 @@
-package by.yurovski.controller.category;
+package by.yurovski.controller.admin;
 
-import by.yurovski.dao.ProductDao;
 import by.yurovski.entity.Product;
 import by.yurovski.entity.User;
-import by.yurovski.enums.CategoryEnum;
-import by.yurovski.service.ProductService;
+import by.yurovski.enums.ProductStatusEnum;
 import by.yurovski.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
@@ -13,28 +11,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
-public class ColorCategoryController {
-    @Autowired
-    ProductService productService;
+public class UsersListController {
     @Autowired
     UserService userService;
-    @GetMapping("/category/color")
-    @PreAuthorize("hasAuthority('product:read')")
+
+    @GetMapping("/users")
+    @PreAuthorize("hasAuthority('product:edit')")
     public String mainPageGet(Model model, Principal principal){
-        List<Product> products=productService.findAllByCategory(CategoryEnum.COLOR);
-        String login = principal.getName();
-        User user=userService.findUserByLogin(login);
-        model.addAttribute("products",products);
-        model.addAttribute("userName",user.getLogin());
-        model.addAttribute("role",user.getRole().toString());
-        model.addAttribute("message", "Hello, master");
-        return "common/color.html";
+        List<User> userList=userService.findAll();
+        model.addAttribute("users",userList);
+        return "admin/userList.html";
     }
     @ExceptionHandler(AccessDeniedException.class)
     public String handleAccessDeniedException(AccessDeniedException ex,Model model) throws Exception {
@@ -42,5 +34,4 @@ public class ColorCategoryController {
         model.addAttribute("message", "Доступ запрещен всвязи с недостаточностью прав.");
         return "user/errorAccessdenied.html";
     }
-
 }

@@ -23,4 +23,22 @@ public class ProductService {
     public Product findProductsByURL(String URL){
         return productDao.findProductsByURL(URL);
     }
+
+
+    @Transactional
+    public Product saveAndFlush(Product product){
+        return productDao.saveAndFlush(product);
+    }
+    @Transactional
+    public void delete(Product product){
+        productDao.delete(product);
+    }
+    @Transactional
+    public Product findProductsById(int id){
+        return productDao.findProductsById(id);
+    }
+    @Transactional
+    public List<Product> findAll(){
+        return productDao.findAll();
+    }
 }
