@@ -15,7 +15,5 @@ public interface OrderItemDao  extends JpaRepository<OrderItem, Long> {
     OrderItem findById(int id);
 
 
-
-    @Override
-    void deleteById(Long aLong);
+    void deleteById(int id);
 }

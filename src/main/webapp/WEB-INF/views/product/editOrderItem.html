@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>InstaGod</title>
 </head>
-<body>
+
+<body >
+edit product page
+<div th:replace="/fragment/navBar.html :: navBar"></div>
+<form  method="post" enctype="application/x-www-form-urlencoded" th:action="${#servletContext.getContextPath()}+'/app/basket/edit'" accept-charset="utf-8">
+    <input type="hidden" name="id" th:value="${id}">
+    <p>
+        <label >Количество</label>
+        <input type="text"  name="amount"  th:value="${amount}" required>
+    </p>
+
+    <p>
+        <label >Размер</label>
+        <select type="text"  name="size" th:value="${size}">
+            <option value="30 см">30 см</option>
+            <option value="40 см">40 см</option>
+            <option value="50 см">50 см</option>
+            <option value="60 см">60 см</option>
+        </select>
+    </p>
+    <p>
+        <label >Примечание</label>
+        <input type="text"  name="note"  th:value="${note}" required>
+    </p>
+    <button type="submit">Send</button>
+</form>
 
 </body>
 </html>

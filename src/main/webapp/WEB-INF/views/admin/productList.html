@@ -11,7 +11,10 @@ Occasion
 <div th:replace="/fragment/navBar.html :: navBar"></div>
 <div >
     <div th:each="product : ${products}">
-        <div><a th:href="${#servletContext.getContextPath()}+'/app/product/'+${product.getURL()}"><img src="https://flowersbrest.by/wp-content/uploads/2020/03/IMG_9831.jpg" width="100px" height="100px"></a></div>
+        <div><a th:href="${#servletContext.getContextPath()}+'/app/product/'+${product.getURL()}">
+            <img th:if="${product.getFotos().isEmpty()}" src="/files/noFoto.png" width="100px" height="100px">
+            <img th:if="${!product.getFotos().isEmpty()}" th:src="'/files/'+${product.getFotos().get(0).getURL()}" width="100px" height="100px">
+        </a></div>
         <div>Название: <span th:text="${product.getTitle()}"></span></div>
         <div>Описание: <span th:text="${product.getDescription()}"></span></div>
         <div>Цена: <span th:text="${product.getCost()}"></span></div>

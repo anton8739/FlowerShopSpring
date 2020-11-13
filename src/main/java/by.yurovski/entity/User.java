@@ -41,5 +41,8 @@ public class User {
             mappedBy = "user",
             cascade = CascadeType.REMOVE)
     private List<OrderItem>  orderItems;
-
+    @OneToMany (fetch = FetchType.EAGER,
+            mappedBy = "user",
+            cascade = CascadeType.REMOVE)
+    private List<Order>  orders;
 }

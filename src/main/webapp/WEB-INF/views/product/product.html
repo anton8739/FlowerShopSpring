@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <html>
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
@@ -9,9 +11,16 @@
 <body >
 Product
 <div th:replace="/fragment/navBar.html :: navBar"></div>
-<span th:text="${message}"></span>
 <div>
-    <div><img></div>
+    <div>
+        <img th:if="${product.getFotos().isEmpty()}" src="/files/noFoto.png" width="100px" height="100px">
+        <div th:unless="${product.getFotos().isEmpty()}">
+            <div th:each="foto : ${product.getFotos()}">
+                <img th:src="'/files/'+${foto.getURL()}" width="100px" height="100px">
+            </div>
+        </div>
+        <a sec:authorize="hasAuthority('product:edit')" th:href="${#servletContext.getContextPath()}+'/app/foto?id='+${product.getId()}">Добавить изображения</a>
+    </div>
     <div><span th:text="${product.getTitle()}"></span></div>
     <div><span th:text="${product.getDescription()}"></span></div>
     <div>Доставка: <span>Доставка бесплатно 24/7, день в день или в согласованную дату.

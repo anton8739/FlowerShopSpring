@@ -2,7 +2,11 @@ package by.yurovski.applicationConf.springConfig;
 
 
 
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
 
 public class SpringMVCDispatcherServletInitialaizer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -23,5 +27,9 @@ public class SpringMVCDispatcherServletInitialaizer extends AbstractAnnotationCo
 
     }
 
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
+    }
 
 }

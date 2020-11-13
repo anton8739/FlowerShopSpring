@@ -3,6 +3,7 @@ package by.yurovski.applicationConf.SecurityConfig;
 import by.yurovski.filter.EncodingFilter;
 import by.yurovski.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
 import org.springframework.context.annotation.ComponentScan;
@@ -17,9 +18,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
-@ComponentScan("by.yurovski")
+@ComponentScan
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -32,10 +34,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/app/main").permitAll()
+                .antMatchers("/app/category/*").permitAll()
+                .antMatchers("/app/product/*").permitAll()
                 .antMatchers("/files/**").permitAll()
+                .antMatchers("/app/basket").permitAll()
+                .antMatchers("/app/basket/add").permitAll()
+                .antMatchers("/app/basket/delete").permitAll()
+                .antMatchers("/app/basket/edit").permitAll()
+                .antMatchers("/app/basket/order/confirm").permitAll()
+                .antMatchers("/app/basket/order").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
-                .antMatchers("/app/main").permitAll()
                 .antMatchers("/app/login").permitAll()
                 .antMatchers("/app/registration").permitAll()
                 .anyRequest()
@@ -44,7 +54,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/app/login")
                 .loginProcessingUrl("/app/login")
-                .defaultSuccessUrl("/app/main")
+                .defaultSuccessUrl("/app/main",true)
                 .and()
                 .logout()
                 .logoutUrl("/app/logout")
@@ -74,5 +84,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected UserDetailsService userDetailsService(){
         return new UserDetailsServiceImpl();
     }
-
+    @Bean
+    public ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
+        return new ServletListenerRegistrationBean<HttpSessionEventPublisher>(new HttpSessionEventPublisher());
+    }
 }

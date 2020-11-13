@@ -153,6 +153,8 @@
       <artifactId>spring-data-jpa</artifactId>
       <version>2.4.0</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session -->
+
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
@@ -177,6 +179,11 @@
       <version>1.18.16</version>
       <scope>provided</scope>
     </dependency>
-
+    <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.4</version>
+    </dependency>
   </dependencies>
 </project>

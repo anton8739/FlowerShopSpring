@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>InstaGod</title>
+</head>
+
+<body >
+Order
+<div th:replace="/fragment/navBar.html :: navBar"></div>
+<span>Детали заказа</span>
+<form  method="post" enctype="application/x-www-form-urlencoded" th:action="${#servletContext.getContextPath()}+'/app/basket/order/confirm'" accept-charset="utf-8">
+    <p>
+        <label >Мобильный телефон</label>
+        <input type="text"  name="mobphone"  placeholder="mobphone" required>
+    </p>
+    <p>
+        <label >Email</label>
+        <input type="text"  name="email"  placeholder="email" required>
+    </p>
+    <p>
+        <label >Адрес</label>
+        <input type="text"  name="address"  placeholder="address" required>
+    </p>
+    <p>
+        <label >Способ оплаты</label>
+        <select type="text"  name="paymentMethod">
+            <option value="cash">Наличными курьеру</option>
+            <option value="card">Картой курьеру</option>
+            <option value="CARD_ONLINE">Картой онлайн</option>
+
+        </select>
+
+    </p>
+    <button type="submit">Подтвердить</button>
+</form>
+</body>
+</html>

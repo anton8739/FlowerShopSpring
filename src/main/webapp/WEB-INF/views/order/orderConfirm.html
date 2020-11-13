@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>InstaGod</title>
+</head>
+
+<body >
+Order
+<div th:replace="/fragment/navBar.html :: navBar"></div>
+<span>Заказ успешно оформлен ожидайте письмо на почту и/или смс на телефон.</span>
+<div>Номер вашего заказа: <span th:text="${orderId}"></span></div>
+</body>
+</html>

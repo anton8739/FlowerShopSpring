@@ -9,16 +9,16 @@
         <li><a th:href="${#servletContext.getContextPath()}+'/app/category/color'">По цвету помпозиции</a></li>
         <li><a th:href="${#servletContext.getContextPath()}+'/app/category/occasion'">Повод</a></li>
         <li><a th:href="${#servletContext.getContextPath()}+'/app/category/gift'">Подарки</a></li>
+        <li><a th:href="${#servletContext.getContextPath()}+'/app/basket'">Корзина</a></li>
         <li sec:authorize="!isAuthenticated()"><a th:href="${#servletContext.getContextPath()}+'/app/login'">Вход в систему</a></li>
         <li sec:authorize="isAuthenticated()">Залогиненные клиенты</li>
-        <li sec:authorize="isAuthenticated()"><a href="#">Список заказов</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="${#servletContext.getContextPath()}+'/app/basket'">Корзина</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="${#servletContext.getContextPath()}+'/app/user/orders'">Список заказов</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="${#servletContext.getContextPath()}+'/app/logout'">Выход из системы</a></li>
         <li sec:authorize="hasAuthority('product:edit')">Панель администратора</li>
         <li sec:authorize="hasAuthority('product:edit')"><a th:href="${#servletContext.getContextPath()}+'/app/archive'">Архив товаров</a></li>
         <li sec:authorize="hasAuthority('product:edit')"><a th:href="${#servletContext.getContextPath()}+'/app/users'">Список пользователей</a></li>
         <li sec:authorize="hasAuthority('product:edit')"><a th:href="${#servletContext.getContextPath()}+'/app/products'">Список товаров</a></li>
-        <li sec:authorize="hasAuthority('product:edit')"><a href="#">Список заказов</a></li>
+        <li sec:authorize="hasAuthority('product:edit')"><a th:href="${#servletContext.getContextPath()}+'/app/orders'">Список заказов</a></li>
         <li sec:authorize="hasAuthority('product:edit')"><a href="#">Настройки</a></li>
     </ul>
 </div>

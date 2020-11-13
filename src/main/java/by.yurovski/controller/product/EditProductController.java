@@ -29,7 +29,7 @@ public class EditProductController {
         model.addAttribute("cost", product.getCost());
         model.addAttribute("url", product.getURL());
         model.addAttribute("category", product.getCategory());
-        model.addAttribute("foto", product.getFoto());
+        model.addAttribute("foto", " ");
         model.addAttribute("availability",product.getAvailability());
         model.addAttribute("status",product.getStatus());
         model.addAttribute("id", id);

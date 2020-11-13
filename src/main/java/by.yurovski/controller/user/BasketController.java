@@ -2,6 +2,7 @@ package by.yurovski.controller.user;
 
 import by.yurovski.entity.OrderItem;
 import by.yurovski.entity.User;
+import by.yurovski.enums.OrderItemStatusEnum;
 import by.yurovski.service.OrderItemService;
 import by.yurovski.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class BasketController {
@@ -24,15 +26,22 @@ public class BasketController {
     OrderItemService orderItemService;
 
     @GetMapping("/basket")
-    @PreAuthorize("hasAuthority('product:read')")
     public String mainPageGet(Model model, Principal principal){
-        String login = principal.getName();
-        User user=userService.findUserByLogin(login);
-        List<OrderItem> basket=orderItemService.findAllByUser(user);
-        model.addAttribute("userName",user.getLogin());
-        model.addAttribute("role",user.getRole().toString());
-        model.addAttribute("message", "Hello, master");
-        model.addAttribute("basket",basket);
+
+        if (principal !=null){
+            String login = principal.getName();
+            User user=userService.findUserByLogin(login);
+            List<OrderItem> basket=orderItemService.findAllByUser(user);
+            basket=basket
+                    .stream()
+                    .filter(orderItem -> orderItem.getStatus().equals(OrderItemStatusEnum.ACTIVE))
+                    .collect(Collectors.toList());
+            model.addAttribute("userName",user.getLogin());
+            model.addAttribute("role",user.getRole().toString());
+            model.addAttribute("message", "Hello, master");
+            model.addAttribute("basket",basket);
+
+        }
 
         return "product/basket.html";
     }

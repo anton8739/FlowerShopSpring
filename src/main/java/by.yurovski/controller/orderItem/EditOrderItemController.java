@@ -2,14 +2,11 @@ package by.yurovski.controller.orderItem;
 
 import by.yurovski.entity.OrderItem;
 import by.yurovski.entity.Product;
-import by.yurovski.entity.User;
 import by.yurovski.enums.CategoryEnum;
 import by.yurovski.enums.ProductStatusEnum;
 import by.yurovski.service.OrderItemService;
 import by.yurovski.service.ProductService;
-import by.yurovski.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -19,43 +16,46 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @SessionAttributes("guestOrderItemList")
-public class ToBasketController {
-    @Autowired
-    ProductService productService;
-    @Autowired
-    UserService userService;
+public class EditOrderItemController {
     @Autowired
     OrderItemService orderItemService;
 
-    @PostMapping(value = "/basket/add")
+    @GetMapping("/basket/edit")
+    public String mainPageGet(@RequestParam String id, Model model, Principal principal){
+
+        OrderItem orderItem=orderItemService.findById(Integer.parseInt(id));
+        model.addAttribute("amount", orderItem.getAmount());
+        model.addAttribute("size", orderItem.getSize());
+        model.addAttribute("note", orderItem.getNote());
+        model.addAttribute("id", id);
+
+        return "product/editOrderItem.html";
+    }
+    @PostMapping("/basket/edit")
     public String mainPagePost(@RequestParam String id,
-                               @RequestParam String size,
                                @RequestParam String amount,
+                               @RequestParam String size,
                                @RequestParam String note,
                                Model model, Principal principal){
-        Product product=productService.findProductsById(Integer.parseInt(id));
-        OrderItem orderItem;
-        List<OrderItem> guestOrderItemList;
-        if(principal!=null){
-            User user=userService.findUserByLogin(principal.getName());
-            orderItem = new OrderItem(product,user,Integer.parseInt(amount),size,note);
-            orderItemService.saveAndFlush(orderItem);
-        } else {
-            orderItem = new OrderItem(product,Integer.parseInt(amount),size,note);
-            orderItem=orderItemService.saveAndFlush(orderItem);
-            System.out.println(orderItem.getId());
-            if(!model.containsAttribute("guestOrderItemList")){
-                guestOrderItemList=new ArrayList<OrderItem>();
-                model.addAttribute("guestOrderItemList", guestOrderItemList);
-            }
-            guestOrderItemList=(List<OrderItem>)model.getAttribute("guestOrderItemList");
-            guestOrderItemList.add(orderItem);
+
+        OrderItem orderItem=orderItemService.findById(Integer.parseInt(id));
+        orderItem.setAmount(Integer.parseInt(amount));
+        orderItem.setNote(note);
+        orderItem.setSize(size);
+        orderItem=orderItemService.saveAndFlush(orderItem);
+        if(principal == null){
+            OrderItem orderIt=orderItem;
+            List<OrderItem> orderItems=(ArrayList<OrderItem>)model.getAttribute("guestOrderItemList");
+            orderItems=orderItems
+                    .stream()
+                    .map(item ->item.getId()==orderIt.getId() ? orderIt : item )
+                    .collect(Collectors.toList());
+            model.addAttribute("guestOrderItemList",orderItems);
         }
-
-
         return "common/main.html";
 
     }

@@ -28,7 +28,7 @@ public class OrderItemService {
     }
 
     @Transactional
-    public void deleteById(Long id){
+    public void deleteById(int id){
         orderItemDao.deleteById(id);
         orderItemDao.flush();
     }

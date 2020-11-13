@@ -1,5 +1,6 @@
 package by.yurovski.controller.orderItem;
 
+import by.yurovski.entity.Order;
 import by.yurovski.entity.OrderItem;
 import by.yurovski.entity.Product;
 import by.yurovski.entity.User;
@@ -11,14 +12,15 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
+@SessionAttributes("guestOrderItemList")
 public class DeleteFromBasket {
     @Autowired
     ProductService productService;
@@ -28,11 +30,21 @@ public class DeleteFromBasket {
     OrderItemService orderItemService;
 
     @GetMapping(value = "/basket/delete")
-    @PreAuthorize("hasAuthority('product:read')")
     public String mainPagePost(@RequestParam String id,
                                Model model, Principal principal){
+        if(principal!=null){
+            orderItemService.deleteById(Integer.parseInt(id));
+        } else {
+            List<OrderItem> orderItems=(ArrayList<OrderItem>)model.getAttribute("guestOrderItemList");
+            orderItems=orderItems
+                    .stream()
+                    .filter(orderItem -> orderItem.getId()!=Integer.parseInt(id))
+                    .collect(Collectors.toList());
+            model.addAttribute("guestOrderItemList",orderItems);
+            orderItemService.deleteById(Integer.parseInt(id));
 
-        orderItemService.deleteById(Long.parseLong(id));
+        }
+
         return "common/main.html";
 
     }

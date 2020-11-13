@@ -10,8 +10,15 @@
 Basket
 <div th:replace="/fragment/navBar.html :: navBar"></div>
 <span th:text="${message}"></span>
-<div th:each="orderItem : ${basket}">
-        <div><img src="https://flowersbrest.by/wp-content/uploads/2020/03/IMG_9831.jpg" width="100px" height="100px"></div>
+<div th:if="${((session.guestOrderItemList == null || session.guestOrderItemList.isEmpty()) && ( basket == null
+ ||  basket.isEmpty()))}" >Корзина пуста</div>
+<div th:if="${session.guestOrderItemList != null }" >
+
+    <div th:each="orderItem : ${session.guestOrderItemList}">
+        <div>
+            <img th:if="${orderItem.getProduct().getFotos().isEmpty()}" src="/files/noFoto.png" width="100px" height="100px">
+            <img th:unless="${orderItem.getProduct().getFotos().isEmpty()}" th:src="'/files/'+${orderItem.getProduct().getFotos().get(0).getURL()}" width="100px" height="100px">
+        </div>
         <div>Название товара:<span th:text="${orderItem.getProduct().getTitle()}"></span></div>
         <div>Описание товара:<span th:text="${orderItem.getProduct().getDescription()}"></span></div>
         <div>Цена:<span th:text="${orderItem.getProduct().getCost()}"></div>
@@ -20,10 +27,30 @@ Basket
         <div>Примечание:<span th:text="${orderItem.getNote()}"></span></div>
         <div>Общая стоимость: <span th:text="${orderItem.getProduct().getCost()*orderItem.getAmount()}"></div>
         <div>
-            <a href="#">Редактировать</a>
+            <a th:href="${#servletContext.getContextPath()}+'/app/basket/edit?id='+${orderItem.getId()}">Редактировать</a>
+            <a th:href="${#servletContext.getContextPath()}+'/app/basket/delete?id='+${orderItem.getId()}">Удалить из корзины</a>
+        </div>
+    </div>
+</div>
+<div><a th:unless="${(session.guestOrderItemList == null || session.guestOrderItemList.isEmpty())}" th:href="${#servletContext.getContextPath()}+'/app/basket/order'">Оформить заказ</a></div>
+
+<div th:if="${basket != null}" th:each="orderItem : ${basket}">
+        <div>
+            <img th:if="${orderItem.getProduct().getFotos().isEmpty()}" src="/files/noFoto.png" width="100px" height="100px">
+            <img th:unless="${orderItem.getProduct().getFotos().isEmpty()}" th:src="'/files/'+${orderItem.getProduct().getFotos().get(0).getURL()}" width="100px" height="100px">
+        </div>
+        <div>Название товара:<span th:text="${orderItem.getProduct().getTitle()}"></span></div>
+        <div>Описание товара:<span th:text="${orderItem.getProduct().getDescription()}"></span></div>
+        <div>Цена:<span th:text="${orderItem.getProduct().getCost()}"></div>
+        <div>Количество:<span th:text="${orderItem.getAmount()}"></span></div>
+        <div>Размер цветов:<span th:text="${orderItem.getSize()}"></span></div>
+        <div>Примечание:<span th:text="${orderItem.getNote()}"></span></div>
+        <div>Общая стоимость: <span th:text="${orderItem.getProduct().getCost()*orderItem.getAmount()}"></div>
+        <div>
+            <a th:href="${#servletContext.getContextPath()}+'/app/basket/edit?id='+${orderItem.getId()}">Редактировать</a>
             <a th:href="${#servletContext.getContextPath()}+'/app/basket/delete?id='+${orderItem.getId()}">Удалить из корзины</a>
         </div>
 </div>
-<div><a href="#">Оформить заказ</a></div>
+<div><a th:unless="${( basket == null ||  basket.isEmpty())}" th:href="${#servletContext.getContextPath()}+'/app/basket/order'">Оформить заказ</a></div>
 </body>
 </html>

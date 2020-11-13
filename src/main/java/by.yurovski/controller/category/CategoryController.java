@@ -31,7 +31,6 @@ public class CategoryController {
     UserService userService;
 
     @GetMapping("/category/{path}")
-    @PreAuthorize("hasAuthority('product:read')")
     public String mainPageGet(@PathVariable String path, Model model, Principal principal){
         if (!path.equals("box")
                 && !path.equals("occasion")
@@ -46,8 +45,6 @@ public class CategoryController {
                 .filter(product -> (product.getStatus().equals(ProductStatusEnum.AVAILABLE)
                         || product.getStatus().equals(ProductStatusEnum.NOT_AVAILABLE)))
                 .collect(Collectors.toList());
-        String login = principal.getName();
-        User user=userService.findUserByLogin(login);
         model.addAttribute("products",products);
         return "common/category.html";
     }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>InstaGod</title>
+</head>
+
+<body >
+addFoto
+<div th:replace="/fragment/navBar.html :: navBar"></div>
+<form  method="post" enctype="multipart/form-data" th:action="${#servletContext.getContextPath()}+'/app/foto'" accept-charset="utf-8">
+    <input type="file" name="file">
+    <input type="hidden" name="id" th:value="${product.getId()}">
+    <button type="submit">Send</button>
+</form>
+
+</body>
+</html>

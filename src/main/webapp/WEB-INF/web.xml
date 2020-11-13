@@ -3,9 +3,16 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
+
   <display-name>Archetype Created Web Application</display-name>
   <welcome-file-list>
     <welcome-file>app/main</welcome-file>
   </welcome-file-list>
+  <listener>
+    <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+  </listener>
+  <session-config>
+    <session-timeout>1</session-timeout>
+  </session-config>
 </web-app>
 

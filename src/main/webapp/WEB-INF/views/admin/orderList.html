@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>InstaGod</title>
+</head>
+
+<body>
+Orders
+<div th:replace="/fragment/navBar.html :: navBar"></div>
+<div th:each="order: ${orders}">
+<span>Номер заказа: <span th:text="${order.getId()}"> </span></span>
+    <span>Пользователь: <span th:if="${order.getUser() != null}" th:text="${order.getUser().getLogin()}"> </span></span>
+    <span>Сумма к оплате: <span th:text="${order.getTotalcost()}"> </span></span>
+    <span>Способ оплаты: <span th:text="${order.getPaymentmethod().toString()}"> </span></span>
+    <span>Статус оплаты: <span th:text="${order.getPaymentstatus().toString()}"> </span></span>
+    <span>Адрес доставки: <span th:text="${order.getAddress()}"> </span></span>
+    <span>Мобильный телефон: <span th:text="${order.getMobphone()}"> </span></span>
+    <span>Статус заказа: <span th:text="${order.getProgress().toString()}"> </span></span>
+    <br><br>
+</div>
+
+
+</body>
+</html>

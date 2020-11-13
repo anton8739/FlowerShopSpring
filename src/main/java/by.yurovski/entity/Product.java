@@ -37,8 +37,6 @@ public class Product {
     @Column(name="cost")
     private double cost;
 
-    @Column(name="foto")
-    private String foto;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name="category")
@@ -53,10 +51,14 @@ public class Product {
     @Column(name="status")
     private ProductStatusEnum status;
 
-    @OneToMany (fetch = FetchType.EAGER,
+    @OneToMany (fetch = FetchType.LAZY,
             mappedBy = "product",
             cascade = CascadeType.REMOVE)
     private List<OrderItem>  orderItems;
 
+    @OneToMany (fetch = FetchType.EAGER,
+            mappedBy = "prod",
+            cascade = CascadeType.REMOVE)
+    private List<Foto>  fotos;
 
 }
