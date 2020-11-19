@@ -33,6 +33,7 @@ import java.util.Locale;
 @Configuration
 @ComponentScan("by.yurovski")
 @PropertySource("classpath:config.properties")
+
 @EnableWebMvc
 @Import({ HibernateConfig.class, SpringSecurityConfig.class})
 public class SpringConfig implements WebMvcConfigurer {

@@ -8,7 +8,9 @@ import org.springframework.context.annotation.Bean;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,9 +37,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/app/main").permitAll()
+                .antMatchers("/app/forgot").permitAll()
+                .antMatchers("/app/forgot/change").permitAll()
                 .antMatchers("/app/category/*").permitAll()
                 .antMatchers("/app/product/*").permitAll()
                 .antMatchers("/files/**").permitAll()
+                .antMatchers("/app/contacts").permitAll()
                 .antMatchers("/app/basket").permitAll()
                 .antMatchers("/app/basket/add").permitAll()
                 .antMatchers("/app/basket/delete").permitAll()
@@ -71,12 +76,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     protected DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setPasswordEncoder(customPasswordEncoder());
         daoAuthenticationProvider.setUserDetailsService(userDetailsService());
         return daoAuthenticationProvider;
     }
     @Bean
-    protected PasswordEncoder passwordEncoder() {
+    protected PasswordEncoder customPasswordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
 
@@ -87,5 +92,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
         return new ServletListenerRegistrationBean<HttpSessionEventPublisher>(new HttpSessionEventPublisher());
+    }
+    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }

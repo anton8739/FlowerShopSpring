@@ -4,6 +4,12 @@
 <div th:fragment="navBar">
     <ul>
         <li>Все клиенты</li>
+        <li>
+            <a th:href="${#servletContext.getContextPath()}+'/app/main?language=ru'">RU</a>
+            <a th:href="${#servletContext.getContextPath()}+'/app/main?language=en'">EN</a>
+        </li>
+        <li  sec:authorize="!isAuthenticated()" ><a th:href="${#servletContext.getContextPath()}+'/app/registration'">Регистрация</a></li>
+        <li><a th:href="${#servletContext.getContextPath()}+'/app/contacts'">Контакты</a></li>
         <li><a th:href="${#servletContext.getContextPath()}+'/app/category/box'">Цветы в коробке</a></li>
         <li><a th:href="${#servletContext.getContextPath()}+'/app/category/composition'">По состваву</a></li>
         <li><a th:href="${#servletContext.getContextPath()}+'/app/category/color'">По цвету помпозиции</a></li>

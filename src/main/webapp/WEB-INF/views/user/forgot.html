@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>InstaGod</title>
+</head>
+
+<body >
+MainPage
+<div th:replace="/fragment/navBar.html :: navBar"></div>
+<span th:text="${message}"></span>
+forgot page
+<form th:if="${user == null}" method="post"  th:action="${#servletContext.getContextPath()}+'/app/forgot'">
+    <p>
+        <label >Введите Email</label>
+        <input type="text"  name="email"  placeholder="email" required>
+    </p>
+    <button type="submit">Восстановить пароль</button>
+</form>
+<form th:if="${user != null}"  method="post"  th:action="${#servletContext.getContextPath()}+'/app/forgot/change'">
+    <p>
+        <label >Введите Новый пароль</label>
+        <input type="hidden"  name="id"  th:value="${user.getId()}">
+        <input type="text"  name="password"  placeholder="passwrod" required>
+    </p>
+    <button type="submit">Сменить пароль пароль</button>
+</form>
+
+</body>
+</html>

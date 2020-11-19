@@ -5,10 +5,12 @@ import by.yurovski.entity.OrderItem;
 import by.yurovski.entity.User;
 import by.yurovski.enums.OrderItemStatusEnum;
 import by.yurovski.enums.PaymentMethodEnum;
+import by.yurovski.event.order.OrderEvent;
 import by.yurovski.service.OrderItemService;
 import by.yurovski.service.OrderService;
 import by.yurovski.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +32,8 @@ public class OrderConfirmController {
     OrderItemService orderItemService;
     @Autowired
     OrderService orderService;
+    @Autowired
+    ApplicationEventPublisher eventPublisher;
     @PostMapping("/basket/order/confirm")
     public String mainPageGet(@RequestParam String mobphone,
                               @RequestParam String email,
@@ -61,6 +65,7 @@ public class OrderConfirmController {
 
 
         order=orderService.saveAndFlush(order);
+        eventPublisher.publishEvent(new OrderEvent(order));
         model.addAttribute("orderId",order.getId());
         return "order/orderConfirm.html";
     }

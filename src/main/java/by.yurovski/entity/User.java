@@ -17,6 +17,13 @@ public class User {
         this.email=email;
         this.enabled=enabled;
     }
+    public User(String email, String login, String password) {
+        this.login=login;
+        this.password=password;
+        this.email=email;
+        this.enabled=false;
+        this.role=UserRole.CLIENT;
+    }
     @Id
     @Column(name="id")
     @GeneratedValue
@@ -45,4 +52,5 @@ public class User {
             mappedBy = "user",
             cascade = CascadeType.REMOVE)
     private List<Order>  orders;
+
 }

@@ -11,11 +11,12 @@ MainPage
 <div th:replace="/fragment/navBar.html :: navBar"></div>
 <span th:text="${message}"></span>
 Login page
-<form  method="post" th:action="${#servletContext.getContextPath()}+'/app/login'">
+<form  method="post"  th:action="${#servletContext.getContextPath()}+'/app/login'">
     <h2 >Login</h2>
     <p>
         <label >Username</label>
         <input type="text"  name="username"  placeholder="Username" required>
+
     </p>
     <p>
         <label>Password</label>
@@ -23,5 +24,6 @@ Login page
     </p>
     <button type="submit">Sign in</button>
 </form>
+<a th:href="${#servletContext.getContextPath()}+'/app/forgot'">Забыли пароль?</a>
 </body>
 </html>
