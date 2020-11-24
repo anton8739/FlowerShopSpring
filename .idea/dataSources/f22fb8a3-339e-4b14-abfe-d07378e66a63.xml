@@ -57,8 +57,8 @@
     </role>
     <schema id="13" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <IntrospectionTimestamp>2020-11-19.16:52:52.132</IntrospectionTimestamp>
-      <IntrospectionStateNumber>4710</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2020-11-24.17:47:54.400</IntrospectionTimestamp>
+      <IntrospectionStateNumber>4823</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -162,11 +162,11 @@
     </table>
     <table id="32" parent="13" name="user">
       <ObjectId>57435</ObjectId>
-      <StateNumber>4430</StateNumber>
+      <StateNumber>4711</StateNumber>
     </table>
     <table id="33" parent="13" name="userverificationtoken">
       <ObjectId>65773</ObjectId>
-      <StateNumber>4707</StateNumber>
+      <StateNumber>4711</StateNumber>
     </table>
     <column id="34" parent="27" name="url">
       <Position>1</Position>
@@ -451,8 +451,8 @@
     </column>
     <column id="77" parent="31" name="description">
       <Position>3</Position>
-      <DataType>varchar(400)|0s</DataType>
-      <StateNumber>4255</StateNumber>
+      <DataType>varchar(600)|0s</DataType>
+      <StateNumber>4823</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="78" parent="31" name="cost">
@@ -622,5 +622,14 @@
       <UnderlyingIndexName>userverificationtoken_id_pk</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
+    <foreign-key id="105" parent="33" name="fkapy48mokn6pfhpyyfk1cytp3i">
+      <ObjectId>65785</ObjectId>
+      <ColNames>user_id</ColNames>
+      <RefTableId>57435</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>user</RefTableName>
+      <RefKeyName>users_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>

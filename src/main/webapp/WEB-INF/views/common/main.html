@@ -5,13 +5,94 @@
 <html>
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-    <link href="css/common/main.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <div th:replace="/fragment/links.html :: header"></div>
+    <link rel="stylesheet" th:href="${#servletContext.getContextPath()}+'/css/common/main.css'" />
+
+
     <title>InstaGod</title>
 </head>
 
-<body >
- <div th:replace="/fragment/navBar.html :: navBar"></div>
- MainPage
-<script src="js/main.js"></script>
+<body>
+<div id="body" class="container-fluid">
+    <div th:replace="/fragment/navBar.html :: navBar"></div>
+
+
+    <div id="mainPage" class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h1>О СЕРВИСЕ</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>КАЧЕСТВО И СВЕЖЕСТЬ</h2>
+                <h3>    Мы сотрудничаем напрямую с Эквадорскими, Колумбийскими, Кенийскими и Голландскими плантациями напрямую.
+                Поставки цветов фактически каждый день, семь дней в неделю.
+                    В случае любых претензий к качеству немедленная замена букета или возврат средств.</h3>
+            </div>
+            <div class="col">
+                <h2>ФИРМЕННАЯ ОТКРЫТКА</h2>
+                <h3>    К любому букет в подарок фирменная открытка с вашим текстом в фирменном конверте One Million Flowers.
+                В каждом конверте средство по уходу за цветами.
+                В случае любых претензий к качеству немедленная замена букета или возврат средств.</h3>
+            </div>
+            <div class="col">
+                <h2>БЕСПЛАТНАЯ ДОСТАВКА</h2>
+                <h3>    Доставим букет уже через 2 часа или в удобное для вас время, 24 часа в сутки.
+                Даже в случае если вы не знаете адреса получателя, понадобится номер телефона или соц.сети.
+                Доставим букет Анонимно если того требует ситуация</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>О САЛОНЕ</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3>    Наша команда уже несколько лет дарит вам эмоции в каждом букете
+
+                ONE MILLION FLOWERS - это салон флористики в центре Москвы и сервис доставки премиальных букетов и цветов в коробке.
+
+                Наши композиции всегда стильные, свежие и всегда доставлены вовремя.
+
+                Наши коробки имеют эксклюзивный дизайн и высочайшее качество исполнения.
+
+                Дизайн наших цветочных композиций олицетворяет собой роскошь и утонченный вкус.</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>КОНТАКТЫ</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3>В случае если цветы в коробке вам срочно потребовались, позвоните или напишите нам, и мы обязательно поможем!<br>
+                    Самовывоз возможен через час после предварительного заказа.<br>
+
+                    Floreal<br>
+
+                    г. Гродно ул. Ожешко 42 кв. 128<br>
+
+                    +7 (499) 495-46-85<br>
+
+                    +7 (905) 736-57-85<br>
+
+                    (мобильный и Whatsapp/Viber/Telegram)<br>
+
+                    Оформить заказ и забрать можно КРУГЛОСУТОЧНО</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A3a24834c2347f8f85c8f9dd8b483653baac5ee58a569ef0b2cdd93ef9661e3d0&amp;width=100%25&amp;height=347&amp;lang=ru_RU&amp;scroll=true"></script>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="/fragment/footer.html :: footer"></div>
+<div th:replace="/fragment/links.html :: scripts"></div>
 </body>
 </html>

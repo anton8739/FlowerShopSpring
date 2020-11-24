@@ -1,30 +1,71 @@
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<div th:fragment="navBar">
-    <ul>
-        <li>Все клиенты</li>
-        <li>
-            <a th:href="${#servletContext.getContextPath()}+'/app/main?language=ru'">RU</a>
-            <a th:href="${#servletContext.getContextPath()}+'/app/main?language=en'">EN</a>
-        </li>
-        <li  sec:authorize="!isAuthenticated()" ><a th:href="${#servletContext.getContextPath()}+'/app/registration'">Регистрация</a></li>
-        <li><a th:href="${#servletContext.getContextPath()}+'/app/contacts'">Контакты</a></li>
-        <li><a th:href="${#servletContext.getContextPath()}+'/app/category/box'">Цветы в коробке</a></li>
-        <li><a th:href="${#servletContext.getContextPath()}+'/app/category/composition'">По состваву</a></li>
-        <li><a th:href="${#servletContext.getContextPath()}+'/app/category/color'">По цвету помпозиции</a></li>
-        <li><a th:href="${#servletContext.getContextPath()}+'/app/category/occasion'">Повод</a></li>
-        <li><a th:href="${#servletContext.getContextPath()}+'/app/category/gift'">Подарки</a></li>
-        <li><a th:href="${#servletContext.getContextPath()}+'/app/basket'">Корзина</a></li>
-        <li sec:authorize="!isAuthenticated()"><a th:href="${#servletContext.getContextPath()}+'/app/login'">Вход в систему</a></li>
-        <li sec:authorize="isAuthenticated()">Залогиненные клиенты</li>
-        <li sec:authorize="isAuthenticated()"><a th:href="${#servletContext.getContextPath()}+'/app/user/orders'">Список заказов</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="${#servletContext.getContextPath()}+'/app/logout'">Выход из системы</a></li>
-        <li sec:authorize="hasAuthority('product:edit')">Панель администратора</li>
-        <li sec:authorize="hasAuthority('product:edit')"><a th:href="${#servletContext.getContextPath()}+'/app/archive'">Архив товаров</a></li>
-        <li sec:authorize="hasAuthority('product:edit')"><a th:href="${#servletContext.getContextPath()}+'/app/users'">Список пользователей</a></li>
-        <li sec:authorize="hasAuthority('product:edit')"><a th:href="${#servletContext.getContextPath()}+'/app/products'">Список товаров</a></li>
-        <li sec:authorize="hasAuthority('product:edit')"><a th:href="${#servletContext.getContextPath()}+'/app/orders'">Список заказов</a></li>
-        <li sec:authorize="hasAuthority('product:edit')"><a href="#">Настройки</a></li>
-    </ul>
+<div id="topMenu" class="container-fluid" th:fragment="navBar">
+    <div class="row">
+        <div class="col">
+                <div class="menuLogo">
+                    <a th:href="${#servletContext.getContextPath()}+'/app/main'">
+                        <img th:src="${#servletContext.getContextPath()}+'/img/logo.png'" width="50px" height="50px"/>
+                    Floreal</a>
+                </div>
+            <div class="buttomMenuLeft">
+                <a href="#" class="links">Категория товара</a>
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </div>
+            <div class="menuLeft">
+                <a class="nav-link" th:href="${#servletContext.getContextPath()}+'/app/category/box'">Цветы в коробке</a>
+                <a class="nav-link" th:href="${#servletContext.getContextPath()}+'/app/category/composition'">По состваву</a>
+                <a class="nav-link" th:href="${#servletContext.getContextPath()}+'/app/category/color'">По цвету помпозиции</a>
+                <a class="nav-link" th:href="${#servletContext.getContextPath()}+'/app/category/occasion'">Повод</a>
+                <a class="nav-link" th:href="${#servletContext.getContextPath()}+'/app/category/gift'">Подарки</a>
+            </div>
+
+            <div class="menuRight">
+                <a sec:authorize="hasAuthority('product:edit')" href="#" class="admin"><i class="fa fa-archive" aria-hidden="true"></i></a>
+                <a th:href="${#servletContext.getContextPath()}+'/app/contacts'"><i class="fa fa-comment-o" aria-hidden="true"></i></a>
+                <a href="#" class="languege"> <i class="fa fa-globe" aria-hidden="true"></i></a>
+                <a href="#" class="signin"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                <a th:href="${#servletContext.getContextPath()}+'/app/basket'"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="menu">
+                <div class="linksMenu">
+                    <ul id="linksMenu">
+                        <a class="nav-link" th:href="${#servletContext.getContextPath()}+'/app/category/box'">Цветы в коробке</a>
+                        <a class="nav-link" th:href="${#servletContext.getContextPath()}+'/app/category/composition'">По состваву</a>
+                        <a class="nav-link" th:href="${#servletContext.getContextPath()}+'/app/category/color'">По цвету помпозиции</a>
+                        <a class="nav-link" th:href="${#servletContext.getContextPath()}+'/app/category/occasion'">Повод</a>
+                        <a class="nav-link" th:href="${#servletContext.getContextPath()}+'/app/category/gift'">Подарки</a>
+                    </ul>
+                </div>
+                <div class="adminMenu">
+                    <ul id="adminMenu">
+                        <li><a class="dropdown-item" sec:authorize="hasAuthority('product:edit')" th:href="${#servletContext.getContextPath()}+'/app/archive'">Архив товаров</a></li>
+                        <li><a class="dropdown-item" sec:authorize="hasAuthority('product:edit')" th:href="${#servletContext.getContextPath()}+'/app/users'">Список пользователей</a></li>
+                        <li><a class="dropdown-item" sec:authorize="hasAuthority('product:edit')" th:href="${#servletContext.getContextPath()}+'/app/products'">Список товаров</a></li>
+                        <li><a class="dropdown-item" sec:authorize="hasAuthority('product:edit')" th:href="${#servletContext.getContextPath()}+'/app/orders'">Список заказов</a></li>
+                        <li><a class="dropdown-item" sec:authorize="hasAuthority('product:edit')" href="#">Настройки</a></li>
+                    </ul>
+                </div>
+                <div class="languegeMenu">
+                    <ul id="languegeMenu">
+                        <li><a class="dropdown-item" th:href="${#servletContext.getContextPath()}+'/app/main?language=ru'">RU</a></li>
+                        <li><a class="dropdown-item" th:href="${#servletContext.getContextPath()}+'/app/main?language=en'">EN</a></li>
+                    </ul>
+                </div>
+                <div class="signinMenu">
+                    <ul id="signinMenu">
+                        <li><a class="dropdown-item" sec:authorize="!isAuthenticated()" th:href="${#servletContext.getContextPath()}+'/app/login'">Вход в систему</a></li>
+                        <li><a class="dropdown-item" sec:authorize="!isAuthenticated()" th:href="${#servletContext.getContextPath()}+'/app/registration'">Регистрация</a></li>
+                        <li><a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="${#servletContext.getContextPath()}+'/app/logout'">Выход из системы</a></li>
+                        <li><a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="${#servletContext.getContextPath()}+'/app/user/orders'">Список заказов</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

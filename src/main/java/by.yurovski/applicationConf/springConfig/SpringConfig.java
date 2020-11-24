@@ -53,6 +53,7 @@ public class SpringConfig implements WebMvcConfigurer {
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setCacheable(false);
 
 
         return templateResolver;

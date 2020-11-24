@@ -3,11 +3,12 @@
 <html>
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <div th:replace="/fragment/links.html :: header"></div>
     <title>InstaGod</title>
 </head>
 
 <body >
-Basket
+<div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
 <span th:text="${message}"></span>
 <div th:if="${((session.guestOrderItemList == null || session.guestOrderItemList.isEmpty()) && ( basket == null
@@ -52,5 +53,8 @@ Basket
         </div>
 </div>
 <div><a th:unless="${( basket == null ||  basket.isEmpty())}" th:href="${#servletContext.getContextPath()}+'/app/basket/order'">Оформить заказ</a></div>
+</div>
+<div th:replace="/fragment/footer.html :: footer"></div>
+<div th:replace="/fragment/links.html :: scripts"></div>
 </body>
 </html>

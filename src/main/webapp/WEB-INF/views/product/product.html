@@ -5,11 +5,12 @@
 <html>
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <div th:replace="/fragment/links.html :: header"></div>
     <title>InstaGod</title>
 </head>
 
 <body >
-Product
+<div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
 <div>
     <div>
@@ -50,5 +51,8 @@ Product
     </form>
 
 </div>
+</div>
+<div th:replace="/fragment/footer.html :: footer"></div>
+<div th:replace="/fragment/links.html :: scripts"></div>
 </body>
 </html>

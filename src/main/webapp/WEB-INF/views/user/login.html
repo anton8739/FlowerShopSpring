@@ -3,11 +3,12 @@
 <html>
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <div th:replace="/fragment/links.html :: header"></div>
     <title>InstaGod</title>
 </head>
 
 <body >
-MainPage
+<div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
 <span th:text="${message}"></span>
 Login page
@@ -25,5 +26,8 @@ Login page
     <button type="submit">Sign in</button>
 </form>
 <a th:href="${#servletContext.getContextPath()}+'/app/forgot'">Забыли пароль?</a>
+</div>
+<div th:replace="/fragment/footer.html :: footer"></div>
+<div th:replace="/fragment/links.html :: scripts"></div>
 </body>
 </html>

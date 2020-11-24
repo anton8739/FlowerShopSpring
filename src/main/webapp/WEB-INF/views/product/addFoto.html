@@ -3,17 +3,20 @@
 <html>
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <div th:replace="/fragment/links.html :: header"></div>
     <title>InstaGod</title>
 </head>
 
 <body >
-addFoto
+<div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
 <form  method="post" enctype="multipart/form-data" th:action="${#servletContext.getContextPath()}+'/app/foto'" accept-charset="utf-8">
     <input type="file" name="file">
     <input type="hidden" name="id" th:value="${product.getId()}">
     <button type="submit">Send</button>
 </form>
-
+</div>
+<div th:replace="/fragment/footer.html :: footer"></div>
+<div th:replace="/fragment/links.html :: scripts"></div>
 </body>
 </html>

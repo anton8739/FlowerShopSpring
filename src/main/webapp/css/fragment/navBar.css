@@ -1,0 +1,168 @@
+#topMenu {
+    background-color: rgba(254, 254, 254, 0.8);
+}
+.menu a {
+    color: #333;
+    font-size: 18px;
+}
+.menu a:hover {
+   text-decoration: none;
+    color: #fefefe;
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+.menuLogo {
+    display: block;
+    float: left;
+    width: fit-content;
+
+}
+.menuLogo img {
+    display: block;
+    float: left;
+
+}
+.menuLogo a {
+    text-decoration: none;
+    color: #333333;
+    font-size: 32px;
+    line-height: 50px;
+}
+.menuLogo a:hover {
+   color:  #333333;
+}
+.buttomMenuLeft {
+    display: block;
+    float: left;
+    margin-left: 5%;
+    margin-right: auto;
+}
+.buttomMenuLeft a {
+    display: none;
+    width: 100%;
+    clear: both;
+    color: #333333;
+    font-size: 26px;
+    line-height: 50px;
+    font-weight: 500;
+}
+.buttomMenuLeft a:hover {
+    text-decoration: none;
+}
+.buttomMenuLeft  i {
+    display: none;
+}
+.menuLeft {
+    display: block;
+    line-height: 50px;
+}
+.menuLeft  a {
+    display: block;
+    float: left;
+    margin-left: 3%;
+    text-decoration: none;
+    color: #333333;
+    font-size: 16px;
+}
+.menuLeft  a:hover {
+    text-decoration: none;
+    color: #fefefe;
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+
+.menuRight {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: 10px;
+    line-height: 50px;
+
+
+}
+.menuRight a {
+    text-decoration: none;
+    color: #333333;
+    font-size: 26px;
+}
+.menuRight a:hover {
+    color: rgb(196, 55, 211);
+}
+
+#adminMenu {
+    display: none;
+    position: absolute;
+
+    right: 0px;
+    clear: both;
+    z-index: 1;
+}
+#languegeMenu {
+    display: none;
+    position: absolute;
+    right: 0px;
+    clear: both;
+    z-index: 1;
+}
+#signinMenu {
+    display: none;
+    position: absolute;
+    right: 0px;
+    clear: both;
+    z-index: 1;
+}
+
+#linksMenu {
+    display: none;
+    clear: both;
+}
+.menu li {
+    list-style-type:none;
+    line-height: 40px;
+    background-color: rgba(254, 254, 254, 0.8);
+}
+.menu li:hover {
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+.menu li a{
+    display: block;
+    width: 95%;
+    margin-left: 5%;
+    color: #333;
+    font-size: 14px;
+}
+.menu li a:hover{
+    text-decoration: none;
+    color: #fefefe;
+}
+@media screen and (max-width:1160px){
+    .mainLink {
+        display: none;
+    }
+    .buttomMenuLeft a {
+        display: inline;
+    }
+    #linksMenu li {
+        display: block;
+    }
+    .menuLeft {
+        display: none;
+    }
+}
+@media screen and (max-width:550px){
+    .buttomMenuLeft a {
+        display: none;
+    }
+    .buttomMenuLeft  i {
+        display: block;
+        line-height: 50px;
+        color: #333333;
+        font-size: 26px;
+    }
+    .buttomMenuLeft  i:hover {
+        color: rgb(196, 55, 211);
+    }
+}
