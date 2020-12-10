@@ -1,0 +1,120 @@
+#body {
+    background-color: rgba(254, 254, 254, 0.8);
+}
+#topMenu {
+    background-color: rgba(254, 254, 254, 0);
+}
+#mainText {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5%;
+}
+.contactForm {
+    width: fit-content;
+    margin-left: 15%;
+    margin-right: auto;
+    font-size: 14px;
+}
+.contactForm label {
+    display: block;
+    width: 200px;
+    height: 20px;
+
+}
+.contactForm input[type=text] {
+    display: block;
+    padding-left: 5px;
+    width: 300px;
+    height: 35px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+.contactForm input[type=text]:focus {
+    border: 1px solid rgba(196, 55, 211, 0.5);
+}
+.contactForm textarea {
+    display: block;
+    padding-left: 5px;
+    width: 300px;
+    height: 100px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    resize: none;
+}
+.sendHref {
+    display: block;
+    width: 100px;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.3);
+    color: #333333;
+    margin-bottom: 10px;
+
+}
+.sendHref:hover {
+    color: #fefefe;
+    text-decoration: none;
+
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+
+}
+.contactForm textarea:focus {
+    border: 1px solid rgba(196, 55, 211, 0.5);
+}
+.contactForm input[type=submit] {
+
+}
+.userMessage {
+
+    background-color: #fefefe;
+}
+#userMessageTitle {
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+}
+#userMessage {
+    font-size: 14px;
+    line-height: 30px;
+    text-align: center;
+    border-bottom: 1px solid rgba(196, 55, 211, 0.5);
+}
+.hidenSpan {
+    font-weight: 500;
+    font-size: 18px;
+    display: none;
+}
+.deleteOrderBtn {
+    display: block;
+    line-height: 20px;
+    width: fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.3);
+    color: #333333;
+    margin: 10px 5px 5px 10px;
+}
+.deleteOrderBtn:hover {
+    color: #fefefe;
+    text-decoration: none;
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+@media screen and (max-width:769px){
+    #userMessageTitle  {
+        display: none;
+    }
+    .hidenSpan {
+        display: block;
+        float: left;
+        margin-right: 10px;
+    }
+    #userMessage {
+        text-align: justify;
+    }
+}

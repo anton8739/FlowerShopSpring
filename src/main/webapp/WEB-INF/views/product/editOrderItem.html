@@ -2,38 +2,56 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <html>
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link rel="shortcut icon" th:href="${#servletContext.getContextPath()}+'/img/logo.png'" type="image/png"/>
     <div th:replace="/fragment/links.html :: header"></div>
-    <title>InstaGod</title>
+    <link rel="stylesheet" th:href="${#servletContext.getContextPath()}+'/css/product/editOrderItem.css'" />
+
 </head>
 
 <body >
 <div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
-<form  method="post" enctype="application/x-www-form-urlencoded" th:action="${#servletContext.getContextPath()}+'/app/basket/edit'" accept-charset="utf-8">
-    <input type="hidden" name="id" th:value="${id}">
-    <p>
-        <label >Количество</label>
-        <input type="text"  name="amount"  th:value="${amount}" required>
-    </p>
+    <div class="container-fluid">
+        <div class="row">
+            <div id="mainText" class="col">
+                Внесите изменения в позицию товара.
+            </div>
 
-    <p>
-        <label >Размер</label>
-        <select type="text"  name="size" th:value="${size}">
-            <option value="30 см">30 см</option>
-            <option value="40 см">40 см</option>
-            <option value="50 см">50 см</option>
-            <option value="60 см">60 см</option>
-        </select>
-    </p>
-    <p>
-        <label >Примечание</label>
-        <input type="text"  name="note"  th:value="${note}" required>
-    </p>
-    <button type="submit">Send</button>
-</form>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form  id="editForm" class="editForm" method="post" enctype="application/x-www-form-urlencoded" th:action="${#servletContext.getContextPath()}+'/app/basket/edit'" accept-charset="utf-8">
+                    <input type="hidden" name="id" th:value="${id}">
+                    <label>Выбор размера:</label>
+                    <select type="text"  name="size" id="size" multiple >
+                        <option value="30 см" selected>30 см</option>
+                        <option value="40 см">40 см</option>
+                        <option value="50 см">50 см</option>
+                        <option value="60 см">60 см</option>
+                    </select>
+                    <input type="hidden" name="size">
+                    <span id="sel1" class="selectItem">30 см</span>
+                    <span id="sel2" class="selectItem">40 см</span>
+                    <span id="sel3" class="selectItem">50 см</span>
+                    <span id="sel4" class="selectItem">60 см</span>
+                    <label>Выбор количества:</label>
+
+                    <span id="minus" class="numberButtons" >-</span>
+                    <input type="number" name="amount" step="1" min="1" value="1" >
+                    <span id="plus" class="numberButtons" >+</span>
+                        <label >Примечание:</label>
+                    <textarea type="text"  name="note"  th:value="${note}" required></textarea>
+                    <a class="sendHref" href="#" onclick="document.getElementById('editForm').submit();">Отправить</a>
+                </form>
+
+            </div>
+        </div>
+
+
+</div>
 </div>
 <div th:replace="/fragment/footer.html :: footer"></div>
 <div th:replace="/fragment/links.html :: scripts"></div>
+<script th:src="${#servletContext.getContextPath()}+'/js/product/editOrderItem.js'"></script>
 </body>
 </html>

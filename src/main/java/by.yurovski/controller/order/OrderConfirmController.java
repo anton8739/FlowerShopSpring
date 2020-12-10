@@ -9,15 +9,14 @@ import by.yurovski.event.order.OrderEvent;
 import by.yurovski.service.OrderItemService;
 import by.yurovski.service.OrderService;
 import by.yurovski.service.UserService;
+import by.yurovski.validator.OrderValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -34,14 +33,20 @@ public class OrderConfirmController {
     OrderService orderService;
     @Autowired
     ApplicationEventPublisher eventPublisher;
+    @Autowired
+    OrderValidator orderValidator;
+
     @PostMapping("/basket/order/confirm")
-    public String mainPageGet(@RequestParam String mobphone,
-                              @RequestParam String email,
-                              @RequestParam String address,
-                              @RequestParam String paymentMethod,
+    public String mainPageGet(@ModelAttribute("orderForm") Order orderForm, BindingResult bindingResult,
                               Model model, Principal principal){
         List<OrderItem> basket;
         Order order;
+        orderValidator.validate(orderForm,bindingResult);
+        if(bindingResult.hasErrors()){
+            return "order/order.html";
+        }
+        orderForm.setPaymentmethod(PaymentMethodEnum
+                .valueOf(orderForm.getPaymentmethod().toString().replaceAll("[,.]", "")));
         if(principal!=null){
             User user =userService.findUserByLogin(principal.getName());
             basket=orderItemService.findAllByUser(user);
@@ -50,7 +55,8 @@ public class OrderConfirmController {
                 orderItem.setStatus(OrderItemStatusEnum.CONFIRMED);
                 orderItemService.saveAndFlush(orderItem);
             });
-            order= new Order(basket, mobphone,email,address,PaymentMethodEnum.valueOf(paymentMethod.toUpperCase()),user);
+
+            order= new Order(basket, orderForm.getMobphone(),orderForm.getEmail(),orderForm.getAddress(),orderForm.getPaymentmethod(),user);
         } else {
             basket=(List<OrderItem>)model.getAttribute("guestOrderItemList");
             basket.forEach(orderItem ->
@@ -58,14 +64,17 @@ public class OrderConfirmController {
                 orderItem.setStatus(OrderItemStatusEnum.CONFIRMED);
                 orderItemService.saveAndFlush(orderItem);
             });
-            order= new Order(basket, mobphone,email,address,PaymentMethodEnum.valueOf(paymentMethod.toUpperCase()));
+            order= new Order(basket, orderForm.getMobphone(),orderForm.getEmail(),orderForm.getAddress(),orderForm.getPaymentmethod());
             model.addAttribute("guestOrderItemList", new ArrayList<>());
         }
 
 
 
         order=orderService.saveAndFlush(order);
+
         eventPublisher.publishEvent(new OrderEvent(order));
+
+
         model.addAttribute("orderId",order.getId());
         return "order/orderConfirm.html";
     }

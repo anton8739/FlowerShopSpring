@@ -1,0 +1,90 @@
+#body {
+    background-color: rgba(254, 254, 254, 0.8);
+}
+#mainText {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5%;
+}
+#addProductForm label{
+    display: block;
+    margin-left: 10px;
+}
+#addProductForm select{
+    display: none;
+}
+.selectItem {
+    display: block;
+    float: left;
+    width: 150px;
+    height: 35px;
+    margin: 10px;
+    text-align: center;
+    padding-top: 5px;
+    border-radius: 3px;
+    background-color: rgba(114, 119, 132, 0.7);
+}
+.selectItem:hover {
+    background-color: rgba(196, 55, 211, 0.5);
+    cursor: pointer;
+    color: #fefefe;
+}
+#sel1 {
+    background-color: rgba(196, 55, 211, 0.5) ;
+}
+#zel1 {
+    background-color: rgba(196, 55, 211, 0.5) ;
+}
+#addProductForm textarea {
+    display: block;
+    padding-left: 5px;
+    width: 90%;
+    height: 100px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    resize: none;
+    margin-bottom: 20px;
+}
+#addProductForm textarea:focus {
+    border: 1px solid rgba(196, 55, 211, 0.5);
+}
+#addProductForm input {
+    display: block;
+    padding-left: 5px;
+    width: 90%;
+    height: 100px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    resize: none;
+    margin-bottom: 20px;
+}
+#addProductForm input:focus {
+    border: 1px solid rgba(196, 55, 211, 0.5);
+}
+.sendHref {
+    display: block;
+    width: fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.3);
+    color: #333333;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+.sendHref:hover {
+    color: #fefefe;
+    text-decoration: none;
+
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+
+}
+.regFormErr{
+    display: block;
+    width: fit-content;
+    height: 20px;
+    margin-bottom: 30px;
+    color: darkred;
+}

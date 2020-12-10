@@ -42,7 +42,6 @@ public class RegistrationController {
     @GetMapping("/registration")
     public String mainPageGet(@RequestParam(value = "token", required = false) String token,Model model, Principal principal){
         if (token !=null){
-            System.out.println(token);
             UserVerificationToken userVerificationToken=userVerificationTokenService.check(token, new Date());
             if (userVerificationToken != null){
                 User user=userVerificationToken.getUser();

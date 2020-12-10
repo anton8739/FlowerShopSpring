@@ -2,20 +2,125 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <html>
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link rel="shortcut icon" th:href="${#servletContext.getContextPath()}+'/img/logo.png'" type="image/png"/>
     <div th:replace="/fragment/links.html :: header"></div>
-    <title>InstaGod</title>
+    <link rel="stylesheet" th:href="${#servletContext.getContextPath()}+'/css/admin/userList.css'" />
 </head>
 
 <body >
 <div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
-<div th:each="user : ${users}">
-    <span><span th:text="'Логин: '+${user.getLogin()}+' Email: '
-    +${user.getEmail()}+' Статус: '+${user.isEnabled()}+' Роль: '+${user.getRole()}+' '"></span></span>
-</div>
+    <div id="mainText" class="row">
+        <div class="col">
+            Список всех пользователей зарегестрированных на сайте!
+        </div>
+    </div>
+
+    <div id="userListTitle" class="row">
+        <div class="col-lg-2 col-md-3">
+            <label>Логин:</label>
+        </div>
+        <div class="col-lg-3 col-md-3">
+            <label>Email:</label>
+        </div>
+        <div class="col-lg-2 col-md-1">
+            <label>Статус:</label>
+        </div>
+        <div class="col-lg-3 col-md-3">
+            <label>Роль:</label>
+        </div>
+    </div>
+    <div th:id="'userList'+${user.getId()}"  class="row userList" th:each="user : ${users}">
+        <div class="col-lg-2 col-md-3">
+            <label class="tlabel">Логин:</label>
+            <span th:text="${user.getLogin()}"></span>
+        </div>
+        <div class="col-lg-3 col-md-3">
+            <label class="tlabel" >Email:</label>
+            <span th:text="${user.getEmail()}"></span>
+        </div>
+        <div class="col-lg-2 col-md-1">
+            <label class="tlabel" >Статус:</label>
+            <span th:text="${user.isEnabled()}"></span>
+        </div>
+        <div class="col-lg-3 col-md-3">
+            <label class="tlabel">Роль:</label>
+            <span class="userRole" th:text="${user.getRole()}"></span>
+            <a th:if="${user.getRole().toString() != 'ADMIN'}" class="editRoleBtn" href="#" th:data-id="${user.getId()}" th:data-name="${user.getLogin()}">Изменить</a>
+        </div>
+        <div class="col-lg-2 col-md-1">
+
+            <a th:if="${user.getRole().toString() != 'ADMIN'}" class="deleteUserBtn" href="#" th:data-id="${user.getId()}" th:data-name="${user.getLogin()}">Удалить</a>
+        </div>
+
+    </div>
+    <div id="usDelete" class="modalUsDelete">
+        <div class="modal-contentUsDelete">
+            <span id="orderDeleteUsCloseBtn" class="closeUsDelete">&times;</span>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        Вы уверены, что хотите удалить пользователя
+                        <span class="deleteUserName"></span>
+                        ?
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <form id="delUserForm" method="post" th:action="${#servletContext.getContextPath()}+'/app/user/delete'">
+                            <input type="hidden" name="userName" >
+                        </form>
+                        <a  class="delUsBtn" href="#"  >Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="usChangeRole" class="modalUsChangeRole">
+        <div class="modal-contentUsChangeRole">
+            <span id="orderChangeRoleUsCloseBtn" class="closeUsChangeRole">&times;</span>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        Вы уверены, что хотите изменить Роль пользователя
+                        <span class="changeRoleUserName"></span>
+                        ?
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Выберите Роль:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form id="changeRoleUserForm" method="post" th:action="${#servletContext.getContextPath()}+'/app/user/change'">
+                            <input type="hidden" name="userNameChangeRole" >
+                            <select type="text"  name="role" id="role" multiple >
+                                <option value="ADMIN" >ADMIN</option>
+                                <option value="CLIENT" selected >CLIENT</option>
+                            </select>
+                            <input type="hidden" name="role">
+                            <span id="sel1" class="selectItem">ADMIN</span>
+                            <span id="sel2" class="selectItem">CLIENT</span>
+                        </form>
+
+
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col">
+
+                        <a  class="changeRoleUsBtn" href="#"  >Изменить Роль</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div th:replace="/fragment/footer.html :: footer"></div>
 <div th:replace="/fragment/links.html :: scripts"></div>
+<script th:src="${#servletContext.getContextPath()}+'/js/admin/userList.js'"></script>
 </body>
 </html>

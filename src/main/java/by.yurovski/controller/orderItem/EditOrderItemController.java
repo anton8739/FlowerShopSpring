@@ -12,6 +12,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -36,12 +38,12 @@ public class EditOrderItemController {
         return "product/editOrderItem.html";
     }
     @PostMapping("/basket/edit")
-    public String mainPagePost(@RequestParam String id,
-                               @RequestParam String amount,
-                               @RequestParam String size,
-                               @RequestParam String note,
-                               Model model, Principal principal){
-
+    public RedirectView mainPagePost(@RequestParam String id,
+                                     @RequestParam String amount,
+                                     @RequestParam String size,
+                                     @RequestParam String note,
+                                     Model model, Principal principal, RedirectAttributes redir){
+        size=size.replaceAll("[,.]", "");
         OrderItem orderItem=orderItemService.findById(Integer.parseInt(id));
         orderItem.setAmount(Integer.parseInt(amount));
         orderItem.setNote(note);
@@ -56,7 +58,10 @@ public class EditOrderItemController {
                     .collect(Collectors.toList());
             model.addAttribute("guestOrderItemList",orderItems);
         }
-        return "common/main.html";
+        RedirectView redirectView= new RedirectView("/app/main",true);
+        redir.addFlashAttribute("Smessage","Изменения успешно внесены! Можете продолжить оформление заказа!");
+        redir.addFlashAttribute("href","href");
+        return redirectView;
 
     }
     @ExceptionHandler(AccessDeniedException.class)

@@ -15,6 +15,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -31,13 +33,15 @@ public class ToBasketController {
     OrderItemService orderItemService;
 
     @PostMapping(value = "/basket/add")
-    public String mainPagePost(@RequestParam String id,
+    public RedirectView mainPagePost(@RequestParam String id,
                                @RequestParam String size,
                                @RequestParam String amount,
                                @RequestParam String note,
-                               Model model, Principal principal){
+                               Model model, Principal principal,RedirectAttributes redir){
         Product product=productService.findProductsById(Integer.parseInt(id));
         OrderItem orderItem;
+        size=size.replaceAll("[,.]", "");
+        System.out.println(size);
         List<OrderItem> guestOrderItemList;
         if(principal!=null){
             User user=userService.findUserByLogin(principal.getName());
@@ -55,8 +59,12 @@ public class ToBasketController {
             guestOrderItemList.add(orderItem);
         }
 
-
-        return "common/main.html";
+        RedirectView redirectView= new RedirectView("/app/product/"+product.getURL(),true);
+        redir.addFlashAttribute("Smessage","" +
+                "Товар успешно добавлен в корзину!" +
+                " Прейти к оформелнию заказа или продолжить покупки!");
+        redir.addFlashAttribute("href","href");
+        return redirectView;
 
     }
     @ExceptionHandler(AccessDeniedException.class)

@@ -2,16 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <html>
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link rel="shortcut icon" th:href="${#servletContext.getContextPath()}+'/img/logo.png'" type="image/png"/>
     <div th:replace="/fragment/links.html :: header"></div>
-    <title>InstaGod</title>
+    <link rel="stylesheet" th:href="${#servletContext.getContextPath()}+'/css/order/orderConfirm.css'"/>
 </head>
 
 <body >
 <div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
-<span>Заказ успешно оформлен ожидайте письмо на почту и/или смс на телефон.</span>
-<div>Номер вашего заказа: <span th:text="${orderId}"></span></div>
+    <div id="mainText" class="row">
+        <div class="col">
+            <span>Заказ успешно оформлен ожидайте письмо на почту и/или смс на телефон.</span>
+        </div>
+    </div>
+    <div id="mainNumber" class="row">
+        <div class="col">
+            <span>Номер вашего заказа:</span>
+            <span th:text="${orderId}"></span>
+        </div>
+    </div>
 </div>
 <div th:replace="/fragment/footer.html :: footer"></div>
 <div th:replace="/fragment/links.html :: scripts"></div>

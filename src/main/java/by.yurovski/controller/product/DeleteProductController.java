@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 
@@ -18,12 +21,14 @@ public class DeleteProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     @PreAuthorize("hasAuthority('product:delete')")
-    public String mainPageGet(@RequestParam String id, Model model, Principal principal){
-        Product product = productService.findProductsById(Integer.parseInt(id));
+    public RedirectView mainPageGet(@RequestParam String productId, Model model, Principal principal, RedirectAttributes redir){
+        Product product = productService.findProductsById(Integer.parseInt(productId));
         productService.delete(product);
-        return "common/main.html";
+        RedirectView redirectView= new RedirectView("/app/category/"+product.getCategory().toString().toLowerCase(),true);
+        redir.addFlashAttribute("Smessage","Товар "+product.getTitle()+" успешно удален!");
+        return redirectView;
     }
     @ExceptionHandler(AccessDeniedException.class)
     public String handleAccessDeniedException(AccessDeniedException ex,Model model) throws Exception {

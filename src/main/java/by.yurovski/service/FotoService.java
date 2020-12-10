@@ -16,4 +16,13 @@ public class FotoService {
     public <S extends Foto> S save(S s){
         return fotoDao.save(s);
     }
+
+    @Transactional
+    public Foto findById(long id){
+        return fotoDao.findById(id);
+    }
+    @Transactional
+    public void delete(Foto foto){
+        fotoDao.delete(foto);
+    }
 }

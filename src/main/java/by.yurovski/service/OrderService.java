@@ -26,4 +26,12 @@ public class OrderService {
     public List<Order> findAllByUser(User user){
         return orderDao.findAllByUser(user);
     }
+    @Transactional
+    public Order findById(long id){
+        return  orderDao.findById(id);
+    }
+    @Transactional
+    public  void delete(Order order){
+        orderDao.delete(order);
+    }
 }

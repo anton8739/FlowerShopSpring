@@ -1,0 +1,255 @@
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-content {
+    background-color: rgba(254, 254, 254, 0.8);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+
+.close {
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+    color: rgba(196, 55, 211, 0.9);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.emptyBasket {
+    margin: 20px 20px 20px 40px;
+}
+#basketTitle {
+    font-size: 18px;
+    text-align: justify;
+    text-indent: 2.5em;
+    font-weight: 500;
+}
+
+[id^=orderItem]{
+    background-color: rgba(196, 55, 211, 0.3);
+    margin: 10px;
+    border-radius: 5px;
+}
+.prodFoto {
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    height: 20px;
+    float: left;
+    border-radius: 3px;
+}
+.prodName  {
+    display: block;
+    width: auto;
+    font-size: 26px;
+    font-weight: 500;
+
+}
+.prodDes {
+    display: block;
+    width: fit-content;
+    font-size: 14px;
+    text-indent: 1.5em;
+    text-align: justify;
+
+}
+.prodSizeLab {
+    display: block;
+    margin: 10px;
+    font-weight: 700;
+    font-size: 16px;
+}
+.prodSize {
+    display: block;
+    margin-left: 20px;
+}
+.prodCostLab {
+    display: block;
+    margin: 10px;
+    font-weight: 700;
+    font-size: 16px;
+}
+.prodCost {
+    display: block;
+    margin-left: 20px;
+}
+.prodAmountLab {
+    display: block;
+    margin: 10px;
+    font-weight: 700;
+    font-size: 16px;
+}
+.prodAmount {
+    display: block;
+    margin-left: 20px;
+
+
+}
+.prodNoteLab {
+    display: block;
+    margin: 10px;
+    font-weight: 700;
+    font-size: 16px;
+}
+.prodNote {
+    display: block;
+    margin-left: 20px;
+
+}
+.prodTotCostLab {
+    display: block;
+    margin: 10px;
+    font-weight: 700;
+    font-size: 16px;
+}
+.totalCost {
+    display: block;
+    margin-left: 20px;
+}
+.editBtn {
+    display: block;
+    width:fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.8);
+    color: #fefefe;
+    float: left;
+    margin: 10px;
+
+}
+.editBtn:hover {
+    color: #fefefe;
+    text-decoration: none;
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+.deleteBtn {
+    display: block;
+    width:fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.8);
+    color: #fefefe;
+    float: left;
+    margin: 10px;
+}
+.deleteBtn:hover {
+    color: #fefefe;
+    text-decoration: none;
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+.orderBtn {
+    display: block;
+    width:fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.8);
+    color: #fefefe;
+    float: left;
+    margin: 10px;
+}
+.orderBtn:hover {
+    color: #fefefe;
+    text-decoration: none;
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+
+/*вкладка удаления*/
+.modalDelete {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-contentDelete {
+    background-color: rgba(254, 254, 254, 0.8);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+}
+
+
+.closeDelete {
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+    color: rgba(196, 55, 211, 0.9);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeDelete:hover,
+.closeDelete:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.delBtn {
+    display: block;
+    width:fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.8);
+    color: #fefefe;
+    float: left;
+    margin: 10px;
+}
+.delBtn:hover {
+    color: #fefefe;
+    text-decoration: none;
+    background-color: darkred;
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+@media screen and (max-width:1160px){
+    .modal-contentDelete {
+        width: 60%;
+    }
+}
+@media screen and (max-width:550px){
+    .modal-contentDelete {
+        width: 80%;
+    }
+}

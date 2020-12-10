@@ -14,4 +14,8 @@ public interface OrderDao extends JpaRepository<Order, Long> {
     <S extends Order> S save(S s);
     List<Order> findAll();
     List<Order> findAllByUser(User user);
+    Order findById(long id);
+
+    @Override
+    void delete(Order order);
 }

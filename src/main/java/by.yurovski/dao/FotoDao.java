@@ -9,4 +9,9 @@ import org.springframework.stereotype.Repository;
 public interface FotoDao extends JpaRepository<Foto, Long> {
     @Override
     <S extends Foto> S save(S s);
+
+    @Override
+    void delete(Foto foto);
+
+    Foto findById(long id);
 }

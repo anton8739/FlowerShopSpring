@@ -4,55 +4,139 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <html>
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link rel="shortcut icon" th:href="${#servletContext.getContextPath()}+'/img/logo.png'" type="image/png"/>
     <div th:replace="/fragment/links.html :: header"></div>
-    <title>InstaGod</title>
+    <link rel="stylesheet" th:href="${#servletContext.getContextPath()}+'/css/product/product.css'"/>
+
 </head>
 
 <body >
+
 <div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
-<div>
-    <div>
-        <img th:if="${product.getFotos().isEmpty()}" src="/files/noFoto.png" width="100px" height="100px">
-        <div th:unless="${product.getFotos().isEmpty()}">
-            <div th:each="foto : ${product.getFotos()}">
-                <img th:src="'/files/'+${foto.getURL()}" width="100px" height="100px">
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <span class="successMessage" th:text="${Smessage}"></span>
+            <a id="createOrder" class="sendHref" th:if="${href !=null}" href="#">Оформить заказ</a>
+            <a class="sendHref" th:if="${href !=null}" th:href="${#servletContext.getContextPath()}+'/app/main'">Продолжить покупки</a>
         </div>
-        <a sec:authorize="hasAuthority('product:edit')" th:href="${#servletContext.getContextPath()}+'/app/foto?id='+${product.getId()}">Добавить изображения</a>
     </div>
-    <div><span th:text="${product.getTitle()}"></span></div>
-    <div><span th:text="${product.getDescription()}"></span></div>
-    <div>Доставка: <span>Доставка бесплатно 24/7, день в день или в согласованную дату.
-Время доставки – от 2 часов. Возможна срочная доставка по согласованию с менеджером.
+    <div class="row">
+        <div id="productImg" class="col-lg-6 col-md-6">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <section class="slider" >
+                            <div th:unless="${product.getFotos().isEmpty()}" th:each="foto : ${product.getFotos()}" class="slide" th:data-thumb="'/files/'+${foto.getURL()}"><img th:src="'/files/'+${foto.getURL()}"></div>
+                            <div th:if="${product.getFotos().isEmpty()}" class="slide" th:data-thumb="${#servletContext.getContextPath()}+'/img/noFoto.png'"><img th:src="${#servletContext.getContextPath()}+'/img/noFoto.png'"></div>
+                        </section>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <a class="sendHref" sec:authorize="hasAuthority('product:edit')" th:href="${#servletContext.getContextPath()}+'/app/foto?id='+${product.getId()}">Добавить изображения</a>
+                        <a id="deleteImgBtn" class="sendHref" sec:authorize="hasAuthority('product:edit')" >Удалить изображение</a>
+                    </div>
+                </div>
+            </div>
 
-Доставка внутри МКАД – Бесплатно
-До 10км. от МКАД – 490р.
-За пределами 10км. от МКАД – 50р. за км.</span></div>
-    <div>Способ оплаты: <span>– Банковской картой
-– Наличными
-– PayPal
-– Картой курьеру
-– По счету для юр. лиц</span></div>
-    <div>К каждому букету</div>
-    <form method="post" enctype="application/x-www-form-urlencoded" th:action="${#servletContext.getContextPath()}+'/app/basket/add'" accept-charset="utf-8">
-        <input type="hidden" name="id" th:value="${product.getId()}">
-        <select type="text"  name="size">
-            <option value="30 см">30 см</option>
-            <option value="40 см">40 см</option>
-            <option value="50 см">50 см</option>
-            <option value="60 см">60 см</option>
-        </select>
-        <div><input type="text" name="amount">Выбор количества</div>
-        <div><input type="text" name="note">Ваши пожелания</div>
-        <div>Итоговая Цена</div>
-        <button type="submit">В корзину</button>
-    </form>
+        </div>
+        <div id="productText" class="col-lg-6 col-md-6">
+            <div class="productText">
+                <div><h1><span th:text="${product.getTitle()}"></span></h1></div>
+                <div><h3>&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${product.getDescription()}"></span></h3></div>
+                <div><h2>Доставка:</h2> <span><h3>&nbsp;&nbsp;&nbsp;&nbsp;Доставка бесплатно 24/7, день в день или в согласованную дату.<br>
+Время доставки – от 2 часов.<br> Возможна срочная доставка по согласованию с менеджером.<br>
+
+Доставка внутри МКАД – Бесплатно<br>
+До 10км. от МКАД – 490р.<br>
+За пределами 10км. от МКАД – 50р. за км.<br></h3></span></div>
+                <div><h2>Способ оплаты:</h2> <span><h3>– Банковской картой <br>
+– Наличными<br>
+– PayPal<br>
+– Картой курьеру<br>
+– По счету для юр. лиц</h3></span></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form id="prodForm" class="prodForm" method="post" enctype="application/x-www-form-urlencoded" th:action="${#servletContext.getContextPath()}+'/app/basket/add'" accept-charset="utf-8">
+                <input type="hidden" name="id" th:value="${product.getId()}">
+                <label>Выбор размера:</label>
+                <select type="text"  name="size" id="size" multiple >
+                    <option value="30 см" selected>30 см</option>
+                    <option value="40 см">40 см</option>
+                    <option value="50 см">50 см</option>
+                    <option value="60 см">60 см</option>
+                </select>
+                <input type="hidden" name="size">
+                <span id="sel1" class="selectItem">30 см</span>
+                <span id="sel2" class="selectItem">40 см</span>
+                <span id="sel3" class="selectItem">50 см</span>
+                <span id="sel4" class="selectItem">60 см</span>
+                <label>Выбор количества:</label>
+
+                <span id="minus" class="numberButtons" >-</span>
+                <input type="number" name="amount" step="1" min="1" value="1" >
+                <span id="plus" class="numberButtons" >+</span>
+
+                <label>Ваши пожелания:(не обязательно)</label>
+                <textarea type="text" name="note"></textarea>
+                <a class="sendHref" href="#" onclick="document.getElementById('prodForm').submit();">В корзину</a>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div id="deleteWindow" class="modal">
+        <div class="modal-content">
+            <span id="closeDelWindowBtn" class="close">&times;</span>
+            <div id="deleteWindowBody" class="container-fluid">
+                <div id="deleteWindowTitle" class="row">
+                    <div class="col">
+                        <span>Выберети фото для удаления:</span>
+                    </div>
+                </div>
+
+                <form id="deleteImgForm" method="post" enctype="application/x-www-form-urlencoded" th:action="${#servletContext.getContextPath()}+'/app/product/deleteFoto'" accept-charset="utf-8">
+
+                    <input type="hidden" name="prodId" th:value="${product.getId()}">
+                    <div  th:each="foto : ${product.getFotos()}" class="row">
+                    <div  class="col-lg-2 col-md-4 col-sm-6">
+                        <img  class="deleteFot" th:src="'/files/'+${foto.getURL()}">
+                    </div>
+                    <div class="col-lg-10 col-md-8 col-sm-6">
+
+                            <input class="deleteCheck" type="checkbox" name="fotos" th:value="${foto.getId()}">
+
+                    </div>
+                </div>
+                </form>
+                <div class="row">
+                    <div class="col">
+                        <a id="deleteFotos" href="#" onclick="document.getElementById('deleteImgForm').submit();" class="sendHref" sec:authorize="hasAuthority('product:edit')" >Удалить изображения</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 </div>
+
 <div th:replace="/fragment/footer.html :: footer"></div>
 <div th:replace="/fragment/links.html :: scripts"></div>
+<script th:src="${#servletContext.getContextPath()}+'/js/product/product.js'"></script>
+
 </body>
 </html>

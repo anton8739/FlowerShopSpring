@@ -2,26 +2,76 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <html>
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link rel="shortcut icon" th:href="${#servletContext.getContextPath()}+'/img/logo.png'" type="image/png"/>
     <div th:replace="/fragment/links.html :: header"></div>
-    <title>InstaGod</title>
+    <link rel="stylesheet" th:href="${#servletContext.getContextPath()}+'/css/user/orderList.css'" />
 </head>
 
 <body>
 <div id="body" class="container-fluid">
-<div th:replace="/fragment/navBar.html :: navBar"></div>
-<div th:each="order: ${orders}">
-<span>Номер заказа: <span th:text="${order.getId()}"> </span></span>
-    <span>Сумма к оплате: <span th:text="${order.getTotalcost()}"> </span></span>
-    <span>Способ оплаты: <span th:text="${order.getPaymentmethod().toString()}"> </span></span>
-    <span>Статус оплаты: <span th:text="${order.getPaymentstatus().toString()}"> </span></span>
-    <span>Адрес доставки: <span th:text="${order.getAddress()}"> </span></span>
-    <span>Мобильный телефон: <span th:text="${order.getMobphone()}"> </span></span>
-    <span>Статус заказа: <span th:text="${order.getProgress().toString()}"> </span></span>
+    <div th:replace="/fragment/navBar.html :: navBar"></div>
+    <div class="row">
+        <div id="mainText" class="col">
+            Список ваших заказов!
+        </div>
+    </div>
+    <div id="orderTitle" class="row" >
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label >Номер заказа: </label>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label >Сумма к оплате: </label>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+            <label >Способ оплаты: </label>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+            <label >Статус оплаты: </label>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label >Адрес доставки: </label>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+            <label >Мобильный телефон: </label>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label >Статус заказа: </label>
+        </div>
+    </div>
+    <div id="orderBar" class="row" th:each="order: ${orders}">
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label class="sLabel">Номер заказа: </label>
+            <span th:text="${order.getId()}"> </span>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label class="sLabel">Сумма к оплате: </label>
+            <span th:text="${order.getTotalcost()}"> </span>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+            <label class="sLabel">Способ оплаты: </label>
+            <span th:text="${order.getPaymentmethod().toString()}"></span>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+            <label class="sLabel">Статус оплаты: </label>
+            <span th:text="${order.getPaymentstatus().toString()}"></span>
 
-</div>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label class="sLabel">Адрес доставки: </label>
+            <span th:text="${order.getAddress()}"></span>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+            <label class="sLabel">Мобильный телефон: </label>
+            <span th:text="${order.getMobphone()}"></span>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label class="sLabel">Статус заказа: </label>
+            <span th:text="${order.getProgress().toString()}"></span>
+        </div>
+    </div>
 </div>
 <div th:replace="/fragment/footer.html :: footer"></div>
 <div th:replace="/fragment/links.html :: scripts"></div>
+<script th:src="${#servletContext.getContextPath()}+'/js/admin/orderList.js'"></script>
 </body>
 </html>

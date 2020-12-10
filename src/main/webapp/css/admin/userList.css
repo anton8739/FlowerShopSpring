@@ -1,0 +1,232 @@
+.userList {
+    background-color: rgba(254, 254, 254, 0.8);
+    margin: 10px;
+    line-height: 50px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+#userListTitle {
+    background-color: rgba(254, 254, 254, 0.8);
+    margin: 10px;
+    line-height: 30px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 500;
+}
+.userList span {
+    display: block;
+    line-height: 50px;
+    width: fit-content;
+    float: left;
+}
+#mainText {
+    background-color: rgba(254, 254, 254, 0.8);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5%;
+    margin: 5px;
+}
+.editRoleBtn {
+    display: block;
+    float: left;
+    line-height: 20px;
+    width: fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: rgba(114, 119, 132, 0.3);
+    color: #333333;
+    margin: 10px 5px 5px 10px;
+
+}
+.editRoleBtn:hover{
+    color: #fefefe;
+    text-decoration: none;
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+.deleteUserBtn {
+    display: block;
+    line-height: 20px;
+    width: fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.3);
+    color: #333333;
+    margin: 10px 5px 5px 10px;
+}
+.deleteUserBtn:hover {
+    color: #fefefe;
+    text-decoration: none;
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+.tlabel {
+    display: none;
+}
+/*вкладка удаления*/
+.modalUsDelete {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-contentUsDelete {
+    background-color: rgba(254, 254, 254, 0.8);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+}
+
+
+.closeUsDelete {
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+    color: rgba(196, 55, 211, 0.9);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeUsDelete:hover,
+.closeUsDelete:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.delUsBtn {
+    display: block;
+    width:fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.8);
+    color: #fefefe;
+    float: left;
+    margin: 10px;
+}
+.delUsBtn:hover {
+    color: #fefefe;
+    text-decoration: none;
+    background-color: darkred;
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+/*вкладка изменения*/
+.modalUsChangeRole {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-contentUsChangeRole {
+    background-color: rgba(254, 254, 254, 0.8);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+}
+
+
+.closeUsChangeRole {
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+    color: rgba(196, 55, 211, 0.9);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeUsChangeRole:hover,
+.closeUsChangeRole:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.changeRoleUsBtn {
+    display: block;
+    width:fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.8);
+    color: #fefefe;
+    float: left;
+    margin: 10px;
+}
+.changeRoleUsBtn:hover {
+    color: #fefefe;
+    text-decoration: none;
+    background-color: darkred;
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+#changeRoleUserForm select{
+    display: none;
+}
+.selectItem {
+    display: block;
+    float: left;
+    width: 150px;
+    height: 35px;
+    margin: 10px;
+    text-align: center;
+    padding-top: 5px;
+    border-radius: 3px;
+    background-color: rgba(114, 119, 132, 0.7);
+}
+.selectItem:hover {
+    background-color: rgba(196, 55, 211, 0.5);
+    cursor: pointer;
+    color: #fefefe;
+}
+#sel1 {
+    background-color: rgba(196, 55, 211, 0.5) ;
+}
+@media screen and (max-width:1160px){
+    .modal-contentUsDelete {
+        width: 60%;
+    }
+    .modal-contentUsChangeRole {
+        width: 60%;
+    }
+}
+@media screen and (max-width:550px){
+    .modal-contentUsDelete {
+        width: 80%;
+    }
+    .modal-contentUsChangeRole {
+        width: 80%;
+    }
+}
+@media screen and (max-width:769px){
+    #userListTitle {
+        display: none;
+    }
+    .tlabel {
+        display: block;
+        float: left;
+        margin-right: 10px;
+    }
+}

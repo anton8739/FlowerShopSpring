@@ -1,0 +1,362 @@
+#mainText {
+    background-color: rgba(254, 254, 254, 0.8);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5%;
+    margin: 5px;
+}
+#orderTitle {
+    background-color: rgba(254, 254, 254, 0.8);
+    font-size: 14px;
+    margin: 5px;
+    line-height: 30px;
+}
+.orderBar {
+    background-color: rgba(254, 254, 254, 0.8);
+    line-height: 30px;
+    font-size: 14px;
+    margin: 5px;
+}
+.sLabel {
+display: none;
+}
+
+.editOrderBtn {
+    display: block;
+    line-height: 20px;
+    width: fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.3);
+    color: #333333;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.editOrderBtn:hover {
+    color: #fefefe;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+
+
+
+/*вкладка изменения способа*/
+.modalChangePaymentMethod {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-contentChangePaymentMethod {
+    background-color: rgba(254, 254, 254, 0.8);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+}
+
+
+.closeChangePaymentMethod {
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+    color: rgba(196, 55, 211, 0.9);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeChangePaymentMethod:hover,
+.closeChangePaymentMethod:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.changePaymentMethodBtn {
+    display: block;
+    width:fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.8);
+    color: #fefefe;
+    float: left;
+    margin: 10px;
+}
+.changePaymentMethodBtn:hover {
+    color: #fefefe;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: darkred;
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+#changePaymentMethod select{
+    display: none;
+}
+.selectItem {
+    display: block;
+    float: left;
+    width: 200px;
+    height: 35px;
+    margin: 10px;
+    text-align: center;
+    padding-top: 5px;
+    border-radius: 3px;
+    background-color: rgba(114, 119, 132, 0.7);
+}
+.selectItem:hover {
+    background-color: rgba(196, 55, 211, 0.5);
+    cursor: pointer;
+    color: #fefefe;
+}
+#sel1 {
+    background-color: rgba(196, 55, 211, 0.5) ;
+}
+
+/*вкладка изменения статуса*/
+.modalChangePaymentStatus {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-contentChangePaymentStatus {
+    background-color: rgba(254, 254, 254, 0.8);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+}
+
+
+.closeChangePaymentStatus {
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+    color: rgba(196, 55, 211, 0.9);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeChangePaymentStatus:hover,
+.closeChangePaymentStatus:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.changePaymentStatusBtn {
+    display: block;
+    width:fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.8);
+    color: #fefefe;
+    float: left;
+    margin: 10px;
+}
+.changePaymentStatusBtn:hover {
+    color: #fefefe;
+    text-decoration: none;
+    background-color: darkred;
+    border-radius: 0 10px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+#changePaymentStatus select{
+    display: none;
+}
+#zel1 {
+    background-color: rgba(196, 55, 211, 0.5) ;
+}
+
+/*вкладка изменения статуса заказа*/
+.modalChangeOrderStatus {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-contentChangeOrderStatus {
+    background-color: rgba(254, 254, 254, 0.8);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+}
+
+
+.closeChangeOrderStatus {
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+    color: rgba(196, 55, 211, 0.9);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeChangeOrderStatus:hover,
+.closeChangeOrderStatus:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.changeOrderStatusBtn {
+    display: block;
+    width:fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.8);
+    color: #fefefe;
+    float: left;
+    margin: 10px;
+}
+.changeOrderStatusBtn:hover {
+    color: #fefefe;
+    text-decoration: none;
+    background-color: darkred;
+    border-radius: 0 10px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+#changeOrderStatus select{
+    display: none;
+}
+#xel1 {
+    background-color: rgba(196, 55, 211, 0.5) ;
+}
+
+
+/*вкладка удаление*/
+.modalDeleteOrder {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-contentDeleteOrder {
+    background-color: rgba(254, 254, 254, 0.8);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+}
+
+
+.closeDeleteOrder {
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+    color: rgba(196, 55, 211, 0.9);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeDeleteOrder:hover,
+.closeDeleteOrder:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.deleteOrderBtn {
+    display: block;
+    width:fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.8);
+    color: #fefefe;
+    float: left;
+    margin: 10px;
+}
+.deleteOrderBtn:hover {
+    color: #fefefe;
+    text-decoration: none;
+    background-color: darkred;
+    border-radius: 0 10px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+
+
+
+@media screen and (max-width:1160px){
+    .modal-contentChangePaymentMethod {
+        width: 60%;
+    }
+    .modal-contentChangePaymentMethod {
+        width: 60%;
+    }
+    .modal-contentChangeOrderStatus {
+        width: 60%;
+    }
+    .modal-contentDeleteOrder{
+        width: 60%;
+    }
+}
+@media screen and (max-width:550px){
+    .modal-contentChangePaymentMethod {
+        width: 80%;
+    }
+    .modal-contentChangePaymentMethod {
+        width: 80%;
+    }
+    .modal-contentChangeOrderStatus {
+        width: 80%;
+}
+    .modal-contentDeleteOrder {
+        width: 80%;
+    }
+}
+@media screen and (max-width:769px){
+    #orderTitle {
+        display: none;
+    }
+    .sLabel {
+        display: block;
+        float: left;
+        margin-right: 10px;
+    }
+}

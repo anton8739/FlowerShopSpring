@@ -31,11 +31,12 @@ public class OrderListener implements ApplicationListener<OrderEvent> {
     private String path;
 
     public void onApplicationEvent(OrderEvent event) {
-       this.confirmOrder(event);
+         this.confirmOrder(event);
+
     }
 
 
-    public void confirmOrder(OrderEvent event){
+    public void confirmOrder(OrderEvent event)  {
 
         Order order=event.getOrder();
         String recipientAddress = order.getEmail();
@@ -50,7 +51,11 @@ public class OrderListener implements ApplicationListener<OrderEvent> {
 
         map.put("cost", order.getTotalcost());
         map.put("pay",order.getPaymentmethod());
+        try {
         orderSMSSender.sendOrderSMS(order);
+        }catch (Exception e){
+
+        }
         try {
             smtpMailSender.sendMessageUsingThymeleafTemplate(recipientAddress,subject,map,"newOrder.html");
         }catch (MessagingException exception){

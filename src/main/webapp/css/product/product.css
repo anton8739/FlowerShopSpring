@@ -1,0 +1,243 @@
+#body {
+    background-color: rgba(254, 254, 254, 0.8);
+}
+#topMenu {
+    background-color: rgba(254, 254, 254, 0);
+}
+/*
+#productImg img{
+  display: block;
+    margin: 3%;
+    width: 94%;
+    border-radius: 5px;
+
+}
+*/
+.productText {
+    display: block;
+    width: 100%;
+    margin-top:3%;
+    text-align: justify;
+}
+.productText h1 {
+    font-size: 32px;
+    border-bottom: 2px solid rgba(196, 55, 211, 0.5);
+}
+.productText h2 {
+    font-size: 25px;
+    border-bottom: 2px solid rgba(196, 55, 211, 0.5);
+}
+.productText h3 {
+    font-size: 16px;
+}
+.prodForm {
+    margin-left: 3%;
+    margin-top: 3%;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+
+    -webkit-appearance: none;
+    margin: 0;
+}
+.numberButtons {
+    display: block;
+    background: rgba(196, 55, 211, 0.5);
+    border-radius: 3px;
+    float: left;
+    width: 35px;
+    height: 35px;
+    padding-top: 7px;
+    padding-left: 15px;
+    border: 3px;
+    color: #fefefe;
+}
+.numberButtons:hover {
+    background-color: rgba(114, 119, 132, 0.7);
+    cursor: pointer;
+    color: #333;
+}
+.prodForm label {
+    display: block;
+    width: fit-content;
+    height: 20px;
+    clear: both;
+    padding-top: 10px;
+    margin-bottom: 20px;
+
+}
+.prodForm  input[type=number]{
+    display: block;
+    font-size: 12px;
+    -webkit-appearance: none;
+    padding-left: 13px;
+    width: 35px;
+    height: 35px;
+    border: 1px solid gray;
+    margin-bottom: 5px;
+    float: left;
+}
+.prodForm select{
+    display: none;
+}
+.selectItem {
+    display: block;
+    float: left;
+    width: 50px;
+    height: 35px;
+    margin-right: 10px;
+    padding-left: 5px;
+    padding-top: 5px;
+    border-radius: 3px;
+    background-color: rgba(114, 119, 132, 0.7);
+}
+.selectItem:hover {
+    background-color: rgba(196, 55, 211, 0.5);
+    cursor: pointer;
+    color: #fefefe;
+}
+#sel1 {
+    background-color: rgba(196, 55, 211, 0.5) ;
+}
+.prodForm textarea {
+    display: block;
+    padding-left: 5px;
+    width: 350px;
+    height: 100px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    resize: none;
+    margin-bottom: 20px;
+}
+.prodForm textarea:focus {
+    border: 1px solid rgba(196, 55, 211, 0.5);
+}
+.sendHref {
+    display: block;
+    width: fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.3);
+    color: #333333;
+    margin-bottom: 10px;
+    float: left;
+    margin-left: 20px;
+}
+.sendHref:hover {
+    color: #fefefe;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+
+}
+.successMessage {
+    display: block;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #1c7430;
+    font-size: 16px;
+
+    border-radius: 5px;
+}
+
+
+/* Слайдер */
+
+.slider {
+    display: block;
+    width: 100%;
+}
+.slide {
+    display: block;
+    width: 100%;
+}
+.slide img {
+    display: block;
+    width: 100%;
+}
+.slick-dots {
+    position: relative;
+    margin-top: -30px;
+    margin-bottom: 130px;
+
+}
+.slick-dots li {
+
+    display: block;
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+.dotImg {
+    width: 100%;
+    height: 100%;
+
+}
+.dotImg img{
+    width: 95%;
+    height: 95%;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-content {
+    background-color: rgba(254, 254, 254, 0.8);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+
+.close {
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+    color: rgba(196, 55, 211, 0.9);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+#deleteWindowTitle {
+    font-size: 18px;
+    text-align: justify;
+    text-indent: 2.5em;
+    font-weight: 500;
+}
+
+.deleteFot {
+    display: block;
+    width: 100%;
+    margin: 10px;
+    border-radius: 5px;
+}
+.deleteCheck {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    transform:scale(1.5);
+}

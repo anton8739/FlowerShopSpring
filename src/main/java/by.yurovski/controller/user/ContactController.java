@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.util.Collection;
@@ -40,14 +42,16 @@ public class ContactController {
         return "user/contacts.html";
     }
     @PostMapping("/contacts")
-    public String mainPagePost(@RequestParam String name,
-            @RequestParam String mobphone,@RequestParam String email,@RequestParam String message,
-            Model model, Principal principal){
+    public RedirectView mainPagePost(@RequestParam String name,
+                                     @RequestParam String mobphone, @RequestParam String email, @RequestParam String message,
+                                     Model model, Principal principal, RedirectAttributes redir){
         System.out.println(name+" "+mobphone+" "+email+" "+message);
         Message mess= new Message(name,mobphone,email,message);
         mess=messageService.save(mess);
-        model.addAttribute("message", mess);
-        return "common/main.html";
+        RedirectView redirectView= new RedirectView("/app/main",true);
+        redir.addFlashAttribute("Smessage","Ваше обращение успешно зарегистрировано, ожидайте ответа на электронную почту!");
+
+        return redirectView;
     }
 
 }

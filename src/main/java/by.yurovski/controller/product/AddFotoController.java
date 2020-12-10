@@ -42,29 +42,32 @@ public class AddFotoController {
     @PostMapping(value = "/foto")
     @PreAuthorize("hasAuthority('product:add')")
     public String mainPagePost(Model model, Principal principal,
-                               @RequestParam("file") MultipartFile file,
+                               @RequestParam("file") MultipartFile[] files,
                                @RequestParam String id) throws IOException {
         String uploadPath = servletContext.getRealPath("/");
         uploadPath=uploadPath.substring(0,uploadPath.length()-2);
         uploadPath=uploadPath
                 .substring(0, uploadPath.lastIndexOf('/'))+"/files/";
 
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath);
+        for(MultipartFile file :files){
+            if (file != null && !file.getOriginalFilename().isEmpty()) {
+                File uploadDir = new File(uploadPath);
 
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
+                }
+
+                String uuidFile = UUID.randomUUID().toString();
+                String resultFilename = uuidFile  + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('.'));
+
+                file.transferTo(new File(uploadPath  + resultFilename));
+                Product product=productService.findProductsById(Integer.parseInt(id));
+                Foto foto = new Foto(product,resultFilename);
+                fotoService.save(foto);
+
             }
-
-            String uuidFile = UUID.randomUUID().toString();
-            String resultFilename = uuidFile  + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('.'));
-
-            file.transferTo(new File(uploadPath  + resultFilename));
-            Product product=productService.findProductsById(Integer.parseInt(id));
-            Foto foto = new Foto(product,resultFilename);
-            fotoService.save(foto);
-
         }
+
             return "common/main.html";
 
 

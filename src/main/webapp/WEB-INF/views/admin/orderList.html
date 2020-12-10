@@ -2,27 +2,251 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <html>
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link rel="shortcut icon" th:href="${#servletContext.getContextPath()}+'/img/logo.png'" type="image/png"/>
     <div th:replace="/fragment/links.html :: header"></div>
-    <title>InstaGod</title>
+    <link rel="stylesheet" th:href="${#servletContext.getContextPath()}+'/css/admin/orderList.css'" />
 </head>
 
 <body>
 <div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
-<div th:each="order: ${orders}">
-<span>Номер заказа: <span th:text="${order.getId()}"> </span></span>
-    <span>Пользователь: <span th:if="${order.getUser() != null}" th:text="${order.getUser().getLogin()}"> </span></span>
-    <span>Сумма к оплате: <span th:text="${order.getTotalcost()}"> </span></span>
-    <span>Способ оплаты: <span th:text="${order.getPaymentmethod().toString()}"> </span></span>
-    <span>Статус оплаты: <span th:text="${order.getPaymentstatus().toString()}"> </span></span>
-    <span>Адрес доставки: <span th:text="${order.getAddress()}"> </span></span>
-    <span>Мобильный телефон: <span th:text="${order.getMobphone()}"> </span></span>
-    <span>Статус заказа: <span th:text="${order.getProgress().toString()}"> </span></span>
-    <br><br>
-</div>
+    <div id="mn" class="row">
+        <div id="mainText" class="col">
+            Список заказов пользователей!
+        </div>
+    </div>
+    <div id="orderTitle" class="row" >
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label >Номер заказа: </label>
+        </div>
+        <div class="col-lg-2 col-md-2">
+            <label >Пользователь: </label>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label >Сумма к оплате: </label>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+            <label >Способ оплаты: </label>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+            <label >Статус оплаты: </label>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label >Адрес доставки: </label>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+            <label >Мобильный телефон: </label>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label >Статус заказа: </label>
+        </div>
+    </div>
+    <div th:id="'orderList'+${order.getId()}" class="row orderBar" th:each="order: ${orders}">
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label class="sLabel">Номер заказа: </label>
+            <span th:text="${order.getId()}"> </span>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+            <label class="sLabel">Пользователь: </label>
+            <span th:if="${order.getUser() != null}" th:text="${order.getUser().getLogin()}"></span>
+            <span th:if="${order.getUser() == null}" >Гость</span>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label class="sLabel">Сумма к оплате: </label>
+            <span th:text="${order.getTotalcost()}"> </span>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+            <label class="sLabel">Способ оплаты: </label>
+            <span th:data-tardetId="${order.getId()}" th:text="${order.getPaymentmethod().toString()}"></span>
+            <a class="editOrderBtn paymentMethodBtn" th:data-id="${order.getId()}" >Изменить</a>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+            <label class="sLabel">Статус оплаты: </label>
+            <span th:data-paymentStatusId="${order.getId()}" th:text="${order.getPaymentstatus().toString()}"></span>
+            <a class="editOrderBtn paymentStatusBtn" th:data-id="${order.getId()}">Изменить</a>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label class="sLabel">Адрес доставки: </label>
+            <span th:text="${order.getAddress()}"></span>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+            <label class="sLabel">Мобильный телефон: </label>
+            <span th:text="${order.getMobphone()}"></span>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12">
+            <label class="sLabel">Статус заказа: </label>
+            <span th:data-orderStatusId="${order.getId()}" th:text="${order.getProgress().toString()}"></span>
+            <a class="editOrderBtn orderStatusBtn" th:data-id="${order.getId()}">Изменить</a>
+        </div>
+        <div class="col-12">
+            <a class="editOrderBtn orderDeleteBtn" th:data-id="${order.getId()}" >Удалить заказ</a>
+        </div>
+    </div>
+
+
+    <div id="changePaymentMethod" class="modalChangePaymentMethod">
+        <div class="modal-contentChangePaymentMethod">
+            <span id="changePaymentMethodCloseBtn" class="closeChangePaymentMethod">&times;</span>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        Вы уверены, что хотите изменить способ оплаты заказа №
+                        <span class="changePaymentMethodOrderId"></span>
+                        ?
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Выберите способ оплаты:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form id="changePaymentMethodForm" method="post" th:action="${#servletContext.getContextPath()}+'/app/order/changePaymentMethod'">
+                            <input type="hidden" name="orderIdChangePaymentMethod" >
+                            <select type="text"  name="paymentMethod" id="paymentMethod" >
+                                <option value="CASH" selected>Наличными курьеру</option>
+                                <option value="CARD">Картой курьеру</option>
+                                <option value="CARD_ONLINE">Картой онлайн</option>
+                            </select>
+                            <input type="hidden" name="paymentMethod">
+                            <span id="sel1" class="selectItem" >Наличными курьеру</span>
+                            <span id="sel2" class="selectItem">Картой курьеру</span>
+                            <span id="sel3" class="selectItem">Картой онлайн</span>
+                        </form>
+
+
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col">
+
+                        <a  class="changePaymentMethodBtn"   >Изменить способ оплаты</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="changePaymentStatus" class="modalChangePaymentStatus">
+        <div class="modal-contentChangePaymentMethod">
+            <span id="changePaymentStatusCloseBtn" class="closeChangePaymentStatus">&times;</span>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        Вы уверены, что хотите изменить статус оплаты заказа №
+                        <span class="changePaymentStatusOrderId"></span>
+                        ?
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Выберите новый статус оплаты:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form id="changePaymentStatusForm" method="post" th:action="${#servletContext.getContextPath()}+'/app/order/changePaymentStatus'">
+                            <input type="hidden" name="orderIdChangePaymentStatus" >
+                            <select type="text"  name="paymentStatus" id="paymentStatus" >
+                                <option value="DONT_PAYED" selected>DONT_PAYED</option>
+                                <option value="PAYED">PAYED</option>
+                            </select>
+                            <input type="hidden" name="paymentMethod">
+                            <span id="zel1" class="selectItem" >DONT_PAYED</span>
+                            <span id="zel2" class="selectItem">PAYED</span>
+                        </form>
+
+
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col">
+
+                        <a  class="changePaymentStatusBtn"   >Изменить статус оплаты</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="changeOrderStatus" class="modalChangeOrderStatus">
+        <div class="modal-contentChangeOrderStatus">
+            <span id="changeOrderStatusCloseBtn" class="closeChangeOrderStatus">&times;</span>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        Вы уверены, что хотите изменить статус заказа №
+                        <span class="changeOrderStatusOrderId"></span>
+                        ?
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Выберите новый статус заказа:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form id="changeOrderStatusForm" method="post" th:action="${#servletContext.getContextPath()}+'/app/order/changeOrderStatus'">
+                            <input type="hidden" name="orderIdChangeOrderStatus" >
+                            <select type="text"  name="orderStatus" id="orderStatus" >
+                                <option value="REGISTERED" selected>REGISTERED</option>
+                                <option value="CONFIRMED">CONFIRMED</option>
+                                <option value="COMPLETED">COMPLETED</option>
+                            </select>
+                            <input type="hidden" name="orderStatus">
+                            <span id="xel1" class="selectItem" >REGISTERED</span>
+                            <span id="xel2" class="selectItem">CONFIRMED</span>
+                            <span id="xel3" class="selectItem">COMPLETED</span>
+                        </form>
+
+
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col">
+
+                        <a  class="changeOrderStatusBtn"   >Изменить статус оплаты</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteOrder" class="modalDeleteOrder">
+        <div class="modal-contentDeleteOrder">
+            <span id="deleteOrderCloseBtn" class="closeDeleteOrder">&times;</span>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        Вы уверены, что хотите удалить заказ №
+                        <span class="deleteOrderOrderId"></span>
+                        ?
+
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <form id="deleteOrderForm" method="post" th:action="${#servletContext.getContextPath()}+'/app/order/deleteOrder'">
+                            <input type="hidden" name="orderIdDeleteOrder" >
+                        </form>
+                        <a  class="deleteOrderBtn"   >Удалить заказ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <div th:replace="/fragment/footer.html :: footer"></div>
 <div th:replace="/fragment/links.html :: scripts"></div>
+<script th:src="${#servletContext.getContextPath()}+'/js/admin/orderList.js'"></script>
 </body>
 </html>

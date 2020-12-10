@@ -27,6 +27,7 @@ public class OrderController {
 
     @GetMapping("/basket/order")
     public String mainPageGet(Model model){
+        model.addAttribute("orderForm", new Order());
         return "order/order.html";
     }
 
@@ -34,6 +35,7 @@ public class OrderController {
     public String handleAccessDeniedException(AccessDeniedException ex,Model model) throws Exception {
 
         model.addAttribute("message", "Доступ запрещен всвязи с недостаточностью прав.");
+
         return "user/errorAccessdenied.html";
     }
 }

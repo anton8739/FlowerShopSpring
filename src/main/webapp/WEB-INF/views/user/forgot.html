@@ -2,30 +2,47 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <html>
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link rel="shortcut icon" th:href="${#servletContext.getContextPath()}+'/img/logo.png'" type="image/png"/>
     <div th:replace="/fragment/links.html :: header"></div>
-    <title>InstaGod</title>
+    <link rel="stylesheet" th:href="${#servletContext.getContextPath()}+'/css/user/forgot.css'"/>
 </head>
 
 <body >
 <div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
-<span th:text="${message}"></span>
-forgot page
-<form th:if="${user == null}" method="post"  th:action="${#servletContext.getContextPath()}+'/app/forgot'">
-    <p>
-        <label >Введите Email</label>
-        <input type="text"  name="email"  placeholder="email" required>
-    </p>
-    <button type="submit">Восстановить пароль</button>
-</form>
-<form th:if="${user != null}"  method="post"  th:action="${#servletContext.getContextPath()}+'/app/forgot/change'">
-    <p>
-        <label >Введите Новый пароль</label>
-        <input type="hidden"  name="id"  th:value="${user.getId()}">
-        <input type="text"  name="password"  placeholder="passwrod" required>
-    </p>
-    <button type="submit">Сменить пароль пароль</button>
+    <div class="row">
+        <div class="col">
+            <span th:text="${message}"></span>
+        </div>
+    </div>
+    <form  id="emailPass" class="regForm" th:if="${user == null}" method="post"  th:action="${#servletContext.getContextPath()}+'/app/forgot'">
+    <div id="enterEmail" class="row">
+        <div class="col">
+            <label class="regFormLab">Введите Email:</label>
+            <span><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+            <input type="text"  name="email"  placeholder="email" required>
+        </div>
+    </div>
+    <div  class="row">
+        <div class="col">
+            <a  class="reloadBtn" href="#" onclick="document.getElementById('emailPass').submit();">Восстановить пароль</a>
+        </div>
+    </div>
+    </form>
+<form class="regForm" id="newPass" th:if="${user != null}"  method="post"  th:action="${#servletContext.getContextPath()}+'/app/forgot/change'">
+   <div id="enterPass" class="row">
+       <div class="col">
+           <label class="regFormLab" >Введите новый пароль:</label>
+           <span><i class="fa fa-key" aria-hidden="true"></i></span>
+           <input type="hidden"  name="id"  th:value="${user.getId()}">
+           <input type="text"  name="password"  placeholder="passwrod" required>
+       </div>
+   </div>
+    <div class="row">
+        <div class="col">
+            <a  class="reloadBtn" href="#" onclick="document.getElementById('newPass').submit();">Сменить пароль</a>
+        </div>
+    </div>
 </form>
 </div>
 <div th:replace="/fragment/footer.html :: footer"></div>

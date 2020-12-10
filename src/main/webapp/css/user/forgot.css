@@ -1,0 +1,61 @@
+#body {
+    background-color: rgba(254, 254, 254, 0.8);
+}
+#enterEmail {
+    margin-top: 5%;
+    margin-left: 10%;
+}
+#enterPass {
+    margin-top: 5%;
+    margin-left: 10%;
+}
+.regFormLab {
+    display: block;
+    width: fit-content;
+    height: 20px;
+    margin: 5px 5px 20px 5px;
+
+}
+.regForm  input {
+    display: block;
+    padding-left: 5px;
+    width: 250px;
+    height: 35px;
+    border: 1px solid gray;
+    border-radius: 0px 5px 5px 0px;
+    margin-bottom: 5px;
+}
+.regForm  input:focus {
+    border-color: rgba(196, 55, 211, 0.8);
+}
+.regForm  span {
+    display: block;
+    background-color: #ededee;
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-radius: 5px 0px 0px 5px;
+    height: 35px;
+    width: 35px;
+    padding-left: 10px;
+    padding-top: 7px;
+    float: left;
+}
+.reloadBtn {
+    display: block;
+    line-height: 20px;
+    width: fit-content;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(114, 119, 132, 0.3);
+    color: #333333;
+    margin: 20px 5px 5px 12%;
+}
+.reloadBtn:hover {
+    color: #fefefe;
+    text-decoration: none;
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}

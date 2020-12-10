@@ -1,0 +1,20 @@
+#body {
+    background-color: rgba(254, 254, 254, 0.8);
+}
+#mainText {
+    display: block;
+    width: fit-content;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5%;
+    text-align: justify;
+}
+#mainNumber {
+    display: block;
+    width: fit-content;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5%;
+    text-align: justify;
+    margin-left: 20px;
+}

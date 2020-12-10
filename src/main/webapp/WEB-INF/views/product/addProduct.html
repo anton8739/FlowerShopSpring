@@ -2,60 +2,124 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <html>
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link rel="shortcut icon" th:href="${#servletContext.getContextPath()}+'/img/logo.png'" type="image/png"/>
     <div th:replace="/fragment/links.html :: header"></div>
-    <title>InstaGod</title>
+    <link rel="stylesheet" th:href="${#servletContext.getContextPath()}+'/css/product/addProduct.css'" />
 </head>
 
 <body >
 <div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
-<form  method="post" enctype="application/x-www-form-urlencoded" th:action="${#servletContext.getContextPath()}+'/app/add'" accept-charset="utf-8">
-    <p>
-        <label >title</label>
-        <input type="text"  name="title"  placeholder="Username" required>
-    </p>
-    <p>
-        <label >description</label>
-        <input type="text"  name="description"  placeholder="Username" required>
-    </p>
-    <p>
-        <label >Cost</label>
-        <input type="text"  name="cost"  placeholder="Username" required>
-    </p>
-    <p>
-        <label >availability</label>
-        <input type="text"  name="availability"  placeholder="Username" required>
-    </p>
-    <p>
-        <label >URL</label>
-        <input type="text"  name="url"  placeholder="Username" required>
-    </p>
-    <p>
-        <label >Category</label>
-        <select type="text"  name="category">
-            <option value="BOX">BOX</option>
-            <option value="COLOR">COLOR</option>
-            <option value="COMPOSITION">COMPOSITION</option>
-            <option value="GIFT">GIFT</option>
-            <option value="OCCASION">OCCASION</option>
-        </select>
+    <div class="row">
+        <div id="mainText" class="col">
+           Добавьте новый товар в интернет магазин!
+        </div>
+    </div>
 
-    </p>
-    <p>
-        <label >Status</label>
-        <select type="text"  name="status">
-            <option value="AVAILABLE">AVAILABLE</option>
-            <option value="NOT_AVAILABLE">NOT_AVAILABLE</option>
-            <option value="ARCHIVE">ARCHIVE</option>
+    <form  id="addProductForm"  th:object="${prodForm}" method="post" enctype="application/x-www-form-urlencoded" th:action="${#servletContext.getContextPath()}+'/app/add'" accept-charset="utf-8">
+    <div class="row">
+        <div class="col">
 
-        </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-4">
+            <label >Название товара:</label>
+        </div>
+        <div class="col-lg-10 col-md-8">
+            <textarea type="text"  name="title"  th:text="${title}" th:field="*{title}" required></textarea>
+            <label class="regFormErr" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-4">
+            <label >Описание товара:</label>
 
-    </p>
-    <button type="submit">Send</button>
+        </div>
+        <div class="col-lg-10 col-md-8">
+            <textarea type="text"  name="description" th:field="*{description}"  th:text="${description}"required></textarea>
+            <label class="regFormErr" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-4">
+            <label >Цена товара:</label>
+        </div>
+        <div class="col-lg-10 col-md-8">
+            <input type="number"  name="cost" th:field="*{cost}"  th:text="${cost}" required>
+            <label class="regFormErr" th:if="${#fields.hasErrors('cost')}" th:errors="*{cost}"></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-4">
+            <label >Наличие товара:</label>
+
+        </div>
+        <div class="col-lg-10 col-md-8">
+            <input type="number"  name="availability" th:field="*{availability}"  th:text="${availability}" required>
+            <label class="regFormErr" th:if="${#fields.hasErrors('availability')}" th:errors="*{availability}"></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-4">
+            <label >URL префикс товара:</label>
+        </div>
+        <div class="col-lg-10 col-md-8">
+            <textarea type="text"  name="url" th:field="*{URL}"  required></textarea>
+            <label class="regFormErr" th:if="${#fields.hasErrors('URL')}" th:errors="*{URL}"></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-4">
+            <label >Категория товара:</label>
+        </div>
+        <div class="col-lg-10 col-md-8">
+            <select type="text"  name="category" id="category" multiple >
+                <option value="BOX" selected>BOX</option>
+                <option value="COLOR">COLOR</option>
+                <option value="COMPOSITION">COMPOSITION</option>
+                <option value="GIFT">GIFT</option>
+                <option value="OCCASION">OCCASION</option>
+            </select>
+            <input type="hidden" name="category">
+            <span id="sel1" class="selectItem">BOX</span>
+            <span id="sel2" class="selectItem">COLOR</span>
+            <span id="sel3" class="selectItem">COMPOSITION</span>
+            <span id="sel4" class="selectItem">GIFT</span>
+            <span id="sel5" class="selectItem">OCCASION</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-4">
+            <label >Статус товара:</label>
+        </div>
+        <div class="col-lg-10 col-md-8">
+            <select type="text"  name="status">
+                <option value="" selected disabled hidden>Choose here</option>
+                <option value="AVAILABLE">AVAILABLE</option>
+                <option value="NOT_AVAILABLE">NOT_AVAILABLE</option>
+                <option value="ARCHIVE">ARCHIVE</option>
+            </select>
+            <select type="text"  name="status" id="status" multiple >
+                <option value="AVAILABLE" selected>AVAILABLE</option>
+                <option value="NOT_AVAILABLE">NOT_AVAILABLE</option>
+                <option value="ARCHIVE">ARCHIVE</option>
+            </select>
+            <input type="hidden" name="status">
+            <span id="zel1" class="selectItem">AVAILABLE</span>
+            <span id="zel2" class="selectItem">NOT_AVAILABLE</span>
+            <span id="zel3" class="selectItem">ARCHIVE</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a class="sendHref" href="#" onclick="document.getElementById('addProductForm').submit();">Добавить товар</a>
+        </div>
+    </div>
 </form>
 </div>
 <div th:replace="/fragment/footer.html :: footer"></div>
 <div th:replace="/fragment/links.html :: scripts"></div>
+<script th:src="${#servletContext.getContextPath()}+'/js/product/addProduct.js'"></script>
 </body>
 </html>

@@ -2,21 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <html>
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link rel="shortcut icon" th:href="${#servletContext.getContextPath()}+'/img/logo.png'" type="image/png"/>
     <div th:replace="/fragment/links.html :: header"></div>
-    <title>InstaGod</title>
+    <link rel="stylesheet" th:href="${#servletContext.getContextPath()}+'/css/product/addFoto.css'" />
 </head>
 
 <body >
 <div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
-<form  method="post" enctype="multipart/form-data" th:action="${#servletContext.getContextPath()}+'/app/foto'" accept-charset="utf-8">
-    <input type="file" name="file">
-    <input type="hidden" name="id" th:value="${product.getId()}">
-    <button type="submit">Send</button>
-</form>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div id="drop-area">
+                    <form class="my-form" method="post" enctype="multipart/form-data" th:action="${#servletContext.getContextPath()}+'/app/foto'" accept-charset="utf-8">
+                        <p>Загрузите изображения с помощью диалога выбора файлов или перетащив нужные изображения в выделенную область</p>
+                        <input type="file" id="fileElem" name="file" multiple accept="image/*,image/jpeg" onchange="handleFiles(files)">
+                        <input type="hidden" name="id" th:value="${product.getId()}">
+                        <label class="button" for="fileElem">Выберети файл</label>
+                        <label class="button"><input id="fileSubmit" type="submit" onclick="sendFile()">Отправить</label>
+                    </form>
+                    <div id="preview">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div th:replace="/fragment/footer.html :: footer"></div>
 <div th:replace="/fragment/links.html :: scripts"></div>
+<script th:src="${#servletContext.getContextPath()}+'/js/product/addFoto.js'"></script>
 </body>
 </html>

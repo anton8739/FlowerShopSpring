@@ -16,4 +16,6 @@ public interface UserDao extends JpaRepository<User, Long> {
     @Override
     <S extends User> S save(S s);
 
+    @Override
+    void delete(User user);
 }

@@ -1,60 +1,78 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<html>
-<head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-    <div th:replace="/fragment/links.html :: header"></div>
-    <title>InstaGod</title>
-</head>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div class="container-fluid" th:fragment="basket">
+<div id="basket" class="modal">
+        <div class="modal-content">
+            <span id="closeBtn" class="close">&times;</span>
+           <div id="basketBody" class="container-fluid">
+               <div id="basketTitle" class="row">
+                   <div class="col">
+                        <span>Корзина:</span>
+                   </div>
+               </div>
 
-<body >
-<div id="body" class="container-fluid">
-<div th:replace="/fragment/navBar.html :: navBar"></div>
-<span th:text="${message}"></span>
-<div th:if="${((session.guestOrderItemList == null || session.guestOrderItemList.isEmpty()) && ( basket == null
- ||  basket.isEmpty()))}" >Корзина пуста</div>
-<div th:if="${session.guestOrderItemList != null }" >
+                <span sec:authorize="!isAuthenticated()" th:if="${session.guestOrderItemList != null && !session.guestOrderItemList.isEmpty() }" id="guestOrderItemList"></span>
+               <div th:id="'orderItem'+ ${orderItem.getId()}" class="row" th:if="${session.guestOrderItemList != null }" th:each="orderItem : ${session.guestOrderItemList}">
 
-    <div th:each="orderItem : ${session.guestOrderItemList}">
-        <div>
-            <img th:if="${orderItem.getProduct().getFotos().isEmpty()}" src="/files/noFoto.png" width="100px" height="100px">
-            <img th:unless="${orderItem.getProduct().getFotos().isEmpty()}" th:src="'/files/'+${orderItem.getProduct().getFotos().get(0).getURL()}" width="100px" height="100px">
-        </div>
-        <div>Название товара:<span th:text="${orderItem.getProduct().getTitle()}"></span></div>
-        <div>Описание товара:<span th:text="${orderItem.getProduct().getDescription()}"></span></div>
-        <div>Цена:<span th:text="${orderItem.getProduct().getCost()}"></div>
-        <div>Количество:<span th:text="${orderItem.getAmount()}"></span></div>
-        <div>Размер цветов:<span th:text="${orderItem.getSize()}"></span></div>
-        <div>Примечание:<span th:text="${orderItem.getNote()}"></span></div>
-        <div>Общая стоимость: <span th:text="${orderItem.getProduct().getCost()*orderItem.getAmount()}"></div>
-        <div>
-            <a th:href="${#servletContext.getContextPath()}+'/app/basket/edit?id='+${orderItem.getId()}">Редактировать</a>
-            <a th:href="${#servletContext.getContextPath()}+'/app/basket/delete?id='+${orderItem.getId()}">Удалить из корзины</a>
+                   <div class="col-lg-2 col-md-4 col-sm-6">
+                       <img class="prodFoto"  th:if="${orderItem.getProduct().getFotos().isEmpty()}" th:src="${#servletContext.getContextPath()}+'/img/noFoto.png'" >
+                       <img class="prodFoto"  th:unless="${orderItem.getProduct().getFotos().isEmpty()}" th:src="'/files/'+${orderItem.getProduct().getFotos().get(0).getURL()}" >
+                   </div>
+                   <div class="col-lg-10 col-md-8 col-sm-6">
+                   <span class="prodName" th:text="${orderItem.getProduct().getTitle()}"></span>
+                   <span class="prodDes" th:text="${orderItem.getProduct().getDescription()}"></span>
+                       <label class="prodSizeLab">Размер:</label>
+                       <span class="prodSize" th:text="${orderItem.getSize()}"></span>
+                       <label class="prodCostLab">Цена:</label>
+                       <span class="prodCost" th:text="${orderItem.getProduct().getCost()}"></span>
+                       <label class="prodAmountLab">Количество:</label>
+                   <span class="prodAmount" th:text="${orderItem.getAmount()}"></span>
+                            <label class="prodNoteLab" >Примечание:</label>
+                   <span class="prodNote" th:text="${orderItem.getNote()}"></span>
+                            <label class="prodTotCostLab">Общая стоимость:</label>
+                       <span class="totalCost" th:text="${orderItem.getProduct().getCost()*orderItem.getAmount()}"></span>
+                   <div>
+                       <a class="editBtn" th:href="${#servletContext.getContextPath()}+'/app/basket/edit?id='+${orderItem.getId()}">Редактировать</a>
+                    <!--   <a class="deleteBtn" th:href="${#servletContext.getContextPath()}+'/app/basket/delete?id='+${orderItem.getId()}">Удалить из корзины</a> -->
+                       <a id="orderDeleteBtn" class="deleteBtn" href="#" th:data-id="${orderItem.getId()}">Удалить из корзины</a>
+
+                   </div>
+                   </div>
+               </div>
+
+               <div class="row">
+                   <div class="col">
+                       <a class="orderBtn" th:unless="${(session.guestOrderItemList == null || session.guestOrderItemList.isEmpty())}" th:href="${#servletContext.getContextPath()}+'/app/basket/order'">Оформить заказ</a>
+                   </div>
+               </div>
+
+
+           </div>
+
+
+
+
+
+</div>
+
+</div>
+    <div id="orderDelete" class="modalDelete">
+        <div class="modal-contentDelete">
+            <span id="orderDeleteCloseBtn" class="closeDelete">&times;</span>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        Вы уверены, что хотите удалить данный товар из корзины?
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <a  class="delBtn" >Удалить</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<div><a th:unless="${(session.guestOrderItemList == null || session.guestOrderItemList.isEmpty())}" th:href="${#servletContext.getContextPath()}+'/app/basket/order'">Оформить заказ</a></div>
 
-<div th:if="${basket != null}" th:each="orderItem : ${basket}">
-        <div>
-            <img th:if="${orderItem.getProduct().getFotos().isEmpty()}" src="/files/noFoto.png" width="100px" height="100px">
-            <img th:unless="${orderItem.getProduct().getFotos().isEmpty()}" th:src="'/files/'+${orderItem.getProduct().getFotos().get(0).getURL()}" width="100px" height="100px">
-        </div>
-        <div>Название товара:<span th:text="${orderItem.getProduct().getTitle()}"></span></div>
-        <div>Описание товара:<span th:text="${orderItem.getProduct().getDescription()}"></span></div>
-        <div>Цена:<span th:text="${orderItem.getProduct().getCost()}"></div>
-        <div>Количество:<span th:text="${orderItem.getAmount()}"></span></div>
-        <div>Размер цветов:<span th:text="${orderItem.getSize()}"></span></div>
-        <div>Примечание:<span th:text="${orderItem.getNote()}"></span></div>
-        <div>Общая стоимость: <span th:text="${orderItem.getProduct().getCost()*orderItem.getAmount()}"></div>
-        <div>
-            <a th:href="${#servletContext.getContextPath()}+'/app/basket/edit?id='+${orderItem.getId()}">Редактировать</a>
-            <a th:href="${#servletContext.getContextPath()}+'/app/basket/delete?id='+${orderItem.getId()}">Удалить из корзины</a>
-        </div>
 </div>
-<div><a th:unless="${( basket == null ||  basket.isEmpty())}" th:href="${#servletContext.getContextPath()}+'/app/basket/order'">Оформить заказ</a></div>
-</div>
-<div th:replace="/fragment/footer.html :: footer"></div>
-<div th:replace="/fragment/links.html :: scripts"></div>
-</body>
-</html>

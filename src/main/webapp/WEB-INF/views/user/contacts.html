@@ -4,10 +4,11 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <html>
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link rel="shortcut icon" th:href="${#servletContext.getContextPath()}+'/img/logo.png'" type="image/png"/>
 
     <div th:replace="/fragment/links.html :: header"></div>
-    <title>InstaGod</title>
+    <link rel="stylesheet" th:href="${#servletContext.getContextPath()}+'/css/user/contacts.css'"/>
+
 
 </head>
 
@@ -15,26 +16,72 @@
 <div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
 <div class="container-fluid">
-<span>Уважаемый <span th:text="${userName}"></span>
+    <div class="row">
+        <div id="mainText" class="col">
+
+                   <span>Уважаемый <span th:text="${userName}"></span>
     вы можете связаться с нами по любым вопросам. Мы обязательно ответим!</span>
-<form sec:authorize="!hasAuthority('product:edit')" method="post" th:action="${#servletContext.getContextPath()}+'/app/contacts'">
-    <label>Ваше имя</label>
-    <input type="text" name="name"><br>
-    <label>Ваш мобильный телефон</label>
-    <input type="text" name="mobphone"><br>
-    <label>Ваш почтовый адрес</label>
-    <input type="text" name="email"><br>
-    <label>Текст обращения</label>
-    <textarea type="text" name="message"></textarea><br>
-    <button type="submit">Отправить</button>
-</form>
-<div sec:authorize="hasAuthority('product:edit')" th:each="message : ${messagesList}">
-    <span th:text="${message.getName()}"></span>
-    <span th:text="${message.getMobphone()}"></span>
-    <span th:text="${message.getEmail()}"></span>
-    <span th:text="${message.getMessage()}"></span>
+
+        </div>
+    </div>
+<div class="row">
+    <div id="contactForm" class="col">
+        <form  id="contForm" class="contactForm" sec:authorize="!hasAuthority('product:edit')" method="post" th:action="${#servletContext.getContextPath()}+'/app/contacts'">
+            <label>Ваше имя :</label>
+            <input type="text" name="name"><br>
+            <label>Ваш мобильный телефон :</label>
+            <input type="text" name="mobphone"><br>
+            <label>Ваш почтовый адрес :</label>
+            <input type="text" name="email"><br>
+            <label>Текст обращения :</label>
+            <textarea type="text" name="message"></textarea><br>
+            <a class="sendHref" href="#" onclick="document.getElementById('contForm').submit();">Отправить</a>
+        </form>
+    </div>
 </div>
-Contacts
+
+    <div sec:authorize="hasAuthority('product:edit')" id="userMessageTitle" class="row">
+        <div class="col-lg-2 col-md-2" >
+            <span>Имя посетителя:</span>
+        </div>
+        <div class="col-lg-2 col-md-2">
+            <span>Мобильный телефон:</span>
+        </div>
+        <div class="col-lg-2 col-md-2">
+            <span>Email:</span>
+        </div>
+        <div class="col-lg-2 col-md-2">
+            <span>Сообщение:</span>
+        </div>
+        <div class="col-lg-2 col-md-2">
+           <span>Обработано/Необработано:</span>
+        </div>
+    </div>
+<div id="userMessage" class="row" sec:authorize="hasAuthority('product:edit')" th:each="message : ${messagesList}">
+    <div class="col-lg-2 col-md-2">
+        <span class="hidenSpan">Имя посетителя:</span>
+        <span th:text="${message.getName()}"></span>
+    </div>
+    <div class="col-lg-2 col-md-2">
+        <span class="hidenSpan">Мобильный телефон:</span>
+        <span th:text="${message.getMobphone()}"></span>
+    </div>
+    <div class="col-lg-2 col-md-2">
+        <span class="hidenSpan">Email:</span>
+        <span th:text="${message.getEmail()}"></span>
+    </div>
+    <div class="col-lg-2 col-md-2">
+        <span class="hidenSpan" >Сообщение:</span>
+        <span th:text="${message.getMessage()}"></span>
+    </div>
+    <div class="col-lg-2 col-md-2">
+        <span class="hidenSpan">Обработано/Необработано:</span>
+        <input type="checkbox" checked>
+    </div>
+    <div class="col-lg-2 col-md-2">
+        <a  class="deleteOrderBtn" href="#">Удалить</a>
+    </div>
+</div>
 </div>
 </div>
 <div th:replace="/fragment/footer.html :: footer"></div>

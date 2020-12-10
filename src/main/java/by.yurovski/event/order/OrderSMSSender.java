@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderSMSSender {
 
-    public static final String ACCOUNT_SID = "ACffe6cffb22735be94d33da1f4aced659";
-    public static final String AUTH_TOKEN = "5642d5100e1f8911d467072a226fcfc1";
 
-    public void sendOrderSMS(Order order){
+    public static final String ACCOUNT_SID = "ACffe6cffb22735be94d33da1f4aced659";
+    public static final String AUTH_TOKEN = "e62ab8c2cb2786e9fddfd17642774a7b";
+    public void sendOrderSMS(Order order) {
         String SMS_BODY;
         if (order.getUser() !=null){
             SMS_BODY="Уважаемый "+order.getUser().getLogin()+

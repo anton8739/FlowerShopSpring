@@ -1,0 +1,33 @@
+#mainText {
+    background-color: rgba(254, 254, 254, 0.8);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5%;
+    margin: 5px;
+}
+#orderTitle {
+    background-color: rgba(254, 254, 254, 0.8);
+    font-size: 14px;
+    margin: 5px;
+    line-height: 30px;
+}
+#orderBar {
+    background-color: rgba(254, 254, 254, 0.8);
+    line-height: 30px;
+    font-size: 14px;
+    margin: 5px;
+}
+.sLabel {
+display: none;
+}
+
+@media screen and (max-width:769px){
+    #orderTitle {
+        display: none;
+    }
+    .sLabel {
+        display: block;
+        float: left;
+        margin-right: 10px;
+    }
+}

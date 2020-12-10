@@ -39,3 +39,10 @@ $(document).ready(function() {
     });
 
 });
+
+$('#userAccDelete').on('click',function () {
+    $('#userDelete').css('display', 'block');
+});
+$('#DeleteUserCloseBtn').on('click', function () {
+    $('#userDelete').css('display', 'none');
+});

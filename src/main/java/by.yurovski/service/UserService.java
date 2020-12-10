@@ -40,4 +40,8 @@ public class UserService {
     public User findUserByLoginAndPassword(String login, String password){
         return  userDao.findUserByLoginAndPassword(login,password);
     }
+    @Transactional
+    public void delete(User user){
+        userDao.delete(user);
+    }
 }

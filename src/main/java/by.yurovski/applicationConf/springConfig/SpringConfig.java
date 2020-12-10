@@ -7,21 +7,22 @@ import by.yurovski.applicationConf.hibernateConfig.HibernateConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 
-import org.springframework.security.web.session.HttpSessionEventPublisher;
+
 
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
+
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
 import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
@@ -117,6 +118,7 @@ public class SpringConfig implements WebMvcConfigurer {
         resolver.setMaxUploadSize(10 * 1024 * 1024);// Upload file size 5M 5*1024*1024
         return resolver;
     }
+
 
 
 

@@ -1,0 +1,51 @@
+#body {
+    background-color: rgba(254, 254, 254, 0.8);
+}
+.centered {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+#drop-area {
+    border: 2px dashed #333;
+    border-radius: 20px;
+    margin-top: 10vh;
+    min-height: 60vh;
+    margin-bottom: 12vh;
+    padding: 20px;
+    color: #333;
+}
+#drop-area.highlight {
+    border-color: rgba(196, 55, 211, 0.5);
+}
+.my-form {
+    margin-bottom: 10px;
+}
+.button {
+    display: block;
+    background: rgba(114, 119, 132, 0.3);
+    border-radius: 3px;
+    float: left;
+    width: fit-content;
+    height: 35px;
+    padding-top: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: 15px;
+    border: 3px;
+    color: #333;
+}
+.button:hover {
+    color: #fefefe;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: rgba(196, 55, 211, 0.5);
+    border-radius: 0 10px;
+    transition: all .3s ease-in-out;
+}
+#fileElem {
+    display: none;
+}
+#fileSubmit{
+    display: none;
+}

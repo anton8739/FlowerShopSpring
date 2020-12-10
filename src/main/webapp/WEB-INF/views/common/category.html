@@ -2,15 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <html>
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link rel="shortcut icon" th:href="${#servletContext.getContextPath()}+'/img/logo.png'" type="image/png"/>
     <div th:replace="/fragment/links.html :: header"></div>
     <link rel="stylesheet" th:href="${#servletContext.getContextPath()}+'/css/fragment/productBar.css'" />
-    <title>InstaGod</title>
+
 </head>
 
 <body >
 <div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
+    <div class="row">
+        <div class="col">
+            <span class="successMessage" th:text="${Smessage}"></span>
+        </div>
+    </div>
 <div th:replace="/fragment/productBar.html :: productBar"></div>
 </div>
 <div th:replace="/fragment/footer.html :: footer"></div>

@@ -2,41 +2,127 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <html>
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link rel="shortcut icon" th:href="${#servletContext.getContextPath()}+'/img/logo.png'" type="image/png"/>
     <div th:replace="/fragment/links.html :: header"></div>
-    <title>InstaGod</title>
+    <link rel="stylesheet" th:href="${#servletContext.getContextPath()}+'/css/admin/productList.css'" />
 </head>
 
 <body >
 <div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
-<div >
-    <div th:each="product : ${products}">
-        <div><a th:href="${#servletContext.getContextPath()}+'/app/product/'+${product.getURL()}">
-            <img th:if="${product.getFotos().isEmpty()}" src="/files/noFoto.png" width="100px" height="100px">
-            <img th:if="${!product.getFotos().isEmpty()}" th:src="'/files/'+${product.getFotos().get(0).getURL()}" width="100px" height="100px">
-        </a></div>
-        <div>Название: <span th:text="${product.getTitle()}"></span></div>
-        <div>Описание: <span th:text="${product.getDescription()}"></span></div>
-        <div>Цена: <span th:text="${product.getCost()}"></span></div>
-        <div>Категория: <span th:text="${product.getCategory()}"></span></div>
-        <div>
-            <span th:if="${product.getAvailability() !=null and product.getAvailability() !=0}">Наличие: <span th:text="${product.getAvailability()}"></span> шт.</span>
-            <span th:if="${product.getAvailability() ==null or product.getAvailability() ==0}">Нет в наличии</span>
-            <a th:href="${#servletContext.getContextPath()}+'/app/product/'+${product.getURL()}">Просмотреть товар</a>
-        </div>
-        <div>
-            <span th:text="${product.getStatus()}"></span><br>
-            <a th:href="${#servletContext.getContextPath()}+'/app/edit?id='+${product.getId()}">Редактировать</a>
-            <a th:href="${#servletContext.getContextPath()}+'/app/delete?id='+${product.getId()}">Удалить</a>
+    <div  id="mainText" class="row">
+        <div class="col">
+            Список товаров размещенных на сайте!
         </div>
     </div>
-    <div>
-        <a th:href="${#servletContext.getContextPath()}+'/app/add/'">Добавить товар</a>
+    <div th:id="'prodItem'+${product.getId()}" class="row prodList" th:each="product : ${products}">
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <a th:href="${#servletContext.getContextPath()}+'/app/product/'+${product.getURL()}">
+                <img class="prodFoto" th:if="${product.getFotos().isEmpty()}" th:src="${#servletContext.getContextPath()}+'/img/noFoto.png'" >
+                <img  class="prodFoto" th:if="${!product.getFotos().isEmpty()}" th:src="'/files/'+${product.getFotos().get(0).getURL()}">
+            </a>
+        </div>
+        <div class="col-lg-10 col-md-8 col-sm-6">
+            <div id="prodListDes" class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-2 col-md-4 ">
+                        <span>Название:</span>
+                    </div>
+                    <div class="col-lg-10 col-md-8 ">
+                        <span  class="prodTitle" th:text="${product.getTitle()}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-md-4 ">
+                         <span>Описание:</span>
+                    </div>
+                    <div class="col-lg-10 col-md-8">
+                        <span class="ProdDescription" th:text="${product.getDescription()}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-md-4 ">
+                        <span>Цена:</span>
+                    </div>
+                    <div class="col-lg-10 col-md-8 ">
+                        <span th:text="${product.getCost()}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-md-4 ">
+                         <span>Категория:</span>
+                    </div>
+                    <div class="col-lg-10 col-md-8 ">
+                        <span th:text="${product.getCategory()}"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-md-4 ">
+                        <span >Наличие:</span>
+                    </div>
+                    <div class="col-lg-10 col-md-8 ">
+                        <span th:if="${product.getAvailability() ==null or product.getAvailability() ==0}">Нет в наличии</span>
+                        <span th:if="${product.getAvailability() !=null and product.getAvailability() !=0}">Наличие: <span th:text="${product.getAvailability()}"></span> шт.</span>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-2 col-md-4 ">
+                        <span>Статус:</span>
+                    </div>
+                    <div class="col-lg-10 col-md-8 ">
+                        <span th:text="${product.getStatus()}"></span><br>
+                    </div>
+
+                </div>
+                <div class="row">
+                <div class="col">
+                    <a id="viewProduct" th:href="${#servletContext.getContextPath()}+'/app/product/'+${product.getURL()}">Просмотреть товар</a>
+                </div>
+
+            </div>
+
+                <div class="row">
+                    <div class="col-lg-2 col-md-4 ">
+                        <a id="editProduct" th:href="${#servletContext.getContextPath()}+'/app/edit?id='+${product.getId()}">Редактировать</a>
+                    </div>
+                    <div class="col-lg-10 col-md-8 ">
+                        <a class="deleteProductB" th:id="'deleteProductBtn'+${product.getId()}" th:data-id="${product.getId()}" th:data-name="${product.getTitle()}">Удалить</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col">
+            <a id="addProduct" th:href="${#servletContext.getContextPath()}+'/app/add/'">Добавить товар</a>
+        </div>
+    </div>
+    <div id="prodDelete" class="modalProdDelete">
+        <div class="modal-contentProdDelete">
+            <span id="DeleteProdCloseBtn" class="closeDelete">&times;</span>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        Вы уверены, что хотите удалить товар <span class="deleteProdName"></span>?
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <form id="delProdForm" method="post" th:action="${#servletContext.getContextPath()}+'/app/delete'">
+                            <input type="hidden" name="productId" >
+                        </form>
+                        <a  class="delProdBtn">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div th:replace="/fragment/footer.html :: footer"></div>
 <div th:replace="/fragment/links.html :: scripts"></div>
+<script th:src="${#servletContext.getContextPath()}+'/js/admin/productList.js'"></script>
 </body>
 </html>

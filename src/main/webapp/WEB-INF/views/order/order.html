@@ -2,42 +2,57 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <html>
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link rel="shortcut icon" th:href="${#servletContext.getContextPath()}+'/img/logo.png'" type="image/png"/>
     <div th:replace="/fragment/links.html :: header"></div>
-    <title>InstaGod</title>
+    <link rel="stylesheet" th:href="${#servletContext.getContextPath()}+'/css/order/order.css'"/>
 </head>
 
 <body >
 <div id="body" class="container-fluid">
 <div th:replace="/fragment/navBar.html :: navBar"></div>
-<span>Детали заказа</span>
-<form  method="post" enctype="application/x-www-form-urlencoded" th:action="${#servletContext.getContextPath()}+'/app/basket/order/confirm'" accept-charset="utf-8">
-    <p>
-        <label >Мобильный телефон</label>
-        <input type="text"  name="mobphone"  placeholder="mobphone" required>
-    </p>
-    <p>
-        <label >Email</label>
-        <input type="text"  name="email"  placeholder="email" required>
-    </p>
-    <p>
-        <label >Адрес</label>
-        <input type="text"  name="address"  placeholder="address" required>
-    </p>
-    <p>
-        <label >Способ оплаты</label>
-        <select type="text"  name="paymentMethod">
-            <option value="cash">Наличными курьеру</option>
-            <option value="card">Картой курьеру</option>
-            <option value="CARD_ONLINE">Картой онлайн</option>
+    <div class="container-fluid">
+        <div class="row">
+            <div id="mainText" class="col">
+                <span>Для завершения оформления, заполните необходимую информацию и ожидайте звонка консультанта!</span>
+            </div>
+        </div>
+        <div class="row">
+            <div  class="col">
+                <form  id="orderForm" th:object="${orderForm}" class="orderForm" method="post" enctype="application/x-www-form-urlencoded" th:action="${#servletContext.getContextPath()}+'/app/basket/order/confirm'" accept-charset="utf-8">
+                    <h3>Детали заказа</h3>
+                    <label>Мобильный телефон :</label>
+                    <span class="orderFormIcon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                    <input type="text"  name="mobphone" th:field="*{mobphone}" placeholder="mobphone" required>
+                    <p class="regFormErr" th:if="${#fields.hasErrors('mobphone')}" th:errors="*{mobphone}"></p>
+                    <label>Email :</label>
+                    <span class="orderFormIcon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                    <input type="text"  name="email" th:field="*{email}"  placeholder="email" required>
+                    <p class="regFormErr" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                    <label>Адрес доставки :</label>
+                    <span class="orderFormIcon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
+                    <input type="text"  name="address" th:field="*{address}" placeholder="address" required>
+                    <label>Способ оплаты</label>
+                    <select type="text"  th:field="*{paymentmethod}" name="paymentMethod" id="paymentMethod" >
+                        <option value="CASH" selected>Наличными курьеру</option>
+                        <option value="CARD">Картой курьеру</option>
+                        <option value="CARD_ONLINE">Картой онлайн</option>
+                    </select>
+                    <input type="hidden" name="paymentMethod">
+                    <span id="sel1" class="selectItem" >Наличными курьеру</span>
+                    <span id="sel2" class="selectItem">Картой курьеру</span>
+                    <span id="sel3" class="selectItem">Картой онлайн</span>
+                    <a class="sendHref" href="#" onclick="document.getElementById('orderForm').submit();">Оформить</a>
+                </form>
+            </div>
+        </div>
 
-        </select>
+    </div>
 
-    </p>
-    <button type="submit">Подтвердить</button>
-</form>
+
+
 </div>
 <div th:replace="/fragment/footer.html :: footer"></div>
 <div th:replace="/fragment/links.html :: scripts"></div>
+<script th:src="${#servletContext.getContextPath()}+'/js/order/order.js'"></script>
 </body>
 </html>

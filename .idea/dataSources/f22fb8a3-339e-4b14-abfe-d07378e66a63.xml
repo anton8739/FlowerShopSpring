@@ -57,8 +57,8 @@
     </role>
     <schema id="13" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <IntrospectionTimestamp>2020-11-24.17:47:54.400</IntrospectionTimestamp>
-      <IntrospectionStateNumber>4823</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2020-12-10.11:11:41.613</IntrospectionTimestamp>
+      <IntrospectionStateNumber>5313</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -162,11 +162,11 @@
     </table>
     <table id="32" parent="13" name="user">
       <ObjectId>57435</ObjectId>
-      <StateNumber>4711</StateNumber>
+      <StateNumber>5313</StateNumber>
     </table>
     <table id="33" parent="13" name="userverificationtoken">
       <ObjectId>65773</ObjectId>
-      <StateNumber>4711</StateNumber>
+      <StateNumber>5313</StateNumber>
     </table>
     <column id="34" parent="27" name="url">
       <Position>1</Position>
@@ -623,13 +623,15 @@
       <Primary>1</Primary>
     </key>
     <foreign-key id="105" parent="33" name="fkapy48mokn6pfhpyyfk1cytp3i">
-      <ObjectId>65785</ObjectId>
+      <ObjectId>65790</ObjectId>
       <ColNames>user_id</ColNames>
       <RefTableId>57435</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>user</RefTableName>
       <RefKeyName>users_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
     </foreign-key>
   </database-model>
 </dataSource>
